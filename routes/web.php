@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('reservar', function(){
+    return view('reservas');
+});
+
+Route::get('cardapio', function(){
+    return view('menu');
+});
+
+Route::get('sobre', function(){
+    return view('sobre');
+});
