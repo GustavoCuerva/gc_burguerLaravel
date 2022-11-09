@@ -13,18 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AboutController;
 
-Route::get('reservar', function(){
-    return view('reservas');
-});
-
-Route::get('cardapio', function(){
-    return view('menu');
-});
-
-Route::get('sobre', function(){
-    return view('sobre');
-});
+Route::get('/', [ProductController::class, 'index']);
+Route::get('/reservations/reserve', [ReservationController::class, 'create']);
+Route::get('/products/menu', [ProductController::class, 'list']);
+Route::get('/about', [AboutController::class, 'about']);

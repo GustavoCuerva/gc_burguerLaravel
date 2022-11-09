@@ -87,7 +87,7 @@
                 <p>Terça a Domingo</p>
                 <p>18:00 ás 00:00</p>
             </div>
-            <a href="reservas.php">RESERVAR</a>
+            <a href="/about">RESERVAR</a>
         </section><!--Baner do meio Reserva-->
 
         <section class="novidades destaque">
