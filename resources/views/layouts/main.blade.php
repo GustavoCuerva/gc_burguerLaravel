@@ -8,7 +8,7 @@
     @yield('styles')
 
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-    <title>@yield('title')</title>
+    <title>GC Burguer - @yield('title')</title>
 </head>
 <body class="@yield('class_body')">
     <div class="fechar" onclick="mostrar_opc_usuario()" style="display: none;"></div>

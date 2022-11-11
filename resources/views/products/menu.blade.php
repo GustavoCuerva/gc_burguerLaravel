@@ -24,7 +24,7 @@
     <h2>Combos</h2>
 
     <div class="produtos produtos_menu ">
-        <a href="produto.php">
+        <a href="{{ route('product', ['id' => 0]) }}">
             <div class="produto produto_menu ">
                 <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
                 <h3>Peça 1 Coma 2</h3>

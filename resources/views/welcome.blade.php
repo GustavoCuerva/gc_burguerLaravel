@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 @endsection
 
-@section('title', 'GC Burguer')
+@section('title', 'Home')
 
 @section('content')
 
