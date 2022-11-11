@@ -17,7 +17,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AboutController;
 
-Route::get('/', [ProductController::class, 'index']);
-Route::get('/reservations/reserve', [ReservationController::class, 'create']);
-Route::get('/products/menu', [ProductController::class, 'list']);
-Route::get('/about', [AboutController::class, 'about']);
+Route::get('/', [ProductController::class, 'index'])->name('index');
+Route::get('/reservations/reserve', [ReservationController::class, 'create'])->name('reserve');
+Route::get('/products/menu', [ProductController::class, 'list'])->name('menu');
+Route::get('/about', [AboutController::class, 'about'])->name('about');

@@ -18,32 +18,32 @@
         <div class="banner">
                 <h2>COMBOS A PARTIR DE <br>R$29,99</h2>
                 <hr style="width: 0;">
-                <img src="/icons/hamburger-svgrepo-com.svg" alt="">
+                <img src="{{ asset('/icons/hamburger-svgrepo-com.svg') }}" alt="">
         </div>
 
         <section class="destaque populares">
             <h2>Nosso lanches favoritos</h2>
             <div class="produtos_populares produtos">
                 <div class="produto produto_popular">
-                    <img src="/img/produtos/2hambuguer.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
                     <h3>Peça 1 Coma 2</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
 
                 <div class="produto produto_popular">
-                    <img src="/img/produtos/combo.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/combo.jpg') }}" alt="">
                     <h3>Combo Hambuguer + Batata + Refri</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
 
                 <div class="produto produto_popular">
-                    <img src="/img/produtos/combo2.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/combo2.jpg') }}" alt="">
                     <h3>Combo Hambuguer + Batata + Refri</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
 
                 <div class="produto produto_popular">
-                    <img src="/img/produtos/2hambuguer.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
                     <h3>Peça 1 Coma 2</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
@@ -56,25 +56,25 @@
             <h2>Aproveite nossas promoções</h2>
             <div class="produtos_populares produtos">
                 <div class="produto produto_promocao">
-                    <img src="/img/produtos/2hambuguer.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
                     <h3>Peça 1 Coma 2</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
 
                 <div class="produto produto_promocao">
-                    <img src="/img/produtos/combo.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/combo.jpg') }}" alt="">
                     <h3>Combo Hambuguer + Batata + Refri</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
 
                 <div class="produto produto_promocao">
-                    <img src="/img/produtos/combo2.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/combo2.jpg') }}" alt="">
                     <h3>Combo Hambuguer + Batata + Refri</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
 
                 <div class="produto produto_promocao">
-                    <img src="/img/produtos/2hambuguer.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
                     <h3>Peça 1 Coma 2</h3>
                     <p class="preco promocao-preco">R$ 30,58</p>
                 </div>
@@ -87,19 +87,19 @@
                 <p>Terça a Domingo</p>
                 <p>18:00 ás 00:00</p>
             </div>
-            <a href="/about">RESERVAR</a>
+            <a href="{{ route('reserve') }}">RESERVAR</a>
         </section><!--Baner do meio Reserva-->
 
         <section class="novidades destaque">
             <h2>Novidades</h2>
             <div class="produtos_novos produtos">
                 <div class="produto produto_novo">
-                    <img src="/img/produtos/2hambuguer.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
                     <h3>Peça 1 Coma 2</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
                 <div class="produto produto_novo">
-                    <img src="/img/produtos/2hambuguer.jpg" alt="">
+                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
                     <h3>Peça 1 Coma 2</h3>
                     <p class="preco">R$ 30,58</p>
                 </div>
@@ -216,7 +216,7 @@
 
 @section('scripts')
 <!-- SWIPER CARROCEL -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="{{ asset('https://unpkg.com/swiper/swiper-bundle.min.js') }}"></script>
 
 <script>
     var swiper = new Swiper(".mySwiper", {

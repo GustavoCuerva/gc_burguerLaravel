@@ -3,7 +3,7 @@
 @section('title', 'Sobre nós')
 
 @section('styles')
-<link rel="stylesheet" href="css/sobre.css">
+<link rel="stylesheet" href="{{ asset('/css/sobre.css')}} ">
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         <section class="informacoes">
 
             <div class="img">
-                <img src="/img/Logo1.png" alt="">
+                <img src="{{ asset('/img/Logo1.png') }}" alt="">
             </div>
 
             <div class="historia">
@@ -25,19 +25,19 @@
                 <h2>Fale conosco</h2>
                 <div class="midias-sociais">
                         <a href="">
-                            <img src="/icons/whatsapp-svgrepo-com.svg" alt="">
+                            <img src="{{ asset('/icons/whatsapp-svgrepo-com.svg') }}" alt="">
                             <span>(11) 900900121</span> 
                         </a>
                         <a href="">
-                            <img src="/icons/facebook-svgrepo-com.svg" alt="">
+                            <img src="{{ asset('/icons/facebook-svgrepo-com.svg') }}" alt="">
                             <span>GC Burguer</span>
                         </a>
                         <a href="">
-                            <img src="/icons/instagram-svgrepo-com.svg" alt="">
+                            <img src="{{ asset('/icons/instagram-svgrepo-com.svg') }}" alt="">
                             <span>@gcburguer</a></span>
                         </a>
                         <a href="">
-                            <img src="/icons/email-svgrepo-com.svg" alt="">
+                            <img src="{{ asset('/icons/email-svgrepo-com.svg') }}" alt="">
                             <span>gcburguer@gmail.com</span>
                         </a>
                 </div>

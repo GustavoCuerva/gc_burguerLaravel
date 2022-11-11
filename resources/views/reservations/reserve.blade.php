@@ -3,7 +3,7 @@
 @section('title', 'Reservar')
 
 @section('styles')
-    <link rel="stylesheet" href="/css/reservas.css">
+    <link rel="stylesheet" href="{{ asset('/css/reservas.css') }}">
 @endsection
 
 @section('class_body', 'reserva_body')
@@ -15,7 +15,7 @@
             <h2>Reservar um horário</h2>
             <div class="box-reservar">
                 <div>
-                    <img src="/img/Logo2.png" alt="">
+                    <img src="{{ asset('/img/Logo2.png') }}" alt="">
                 </div>
                 <div>
                     <form action="#" method="post" class="form_reserva">
