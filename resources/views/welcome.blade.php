@@ -12,9 +12,6 @@
 
 @section('content')
 
-
-<main class="corpo">
-
         <div class="banner">
                 <h2>COMBOS A PARTIR DE <br>R$29,99</h2>
                 <hr style="width: 0;">
@@ -209,7 +206,6 @@
                 <input type="button" value="ENVIAR" class="enviar">
             </form>
         </section><!--Avaliar-->
-    </main><!--Corpor-->
 
 @endsection
 

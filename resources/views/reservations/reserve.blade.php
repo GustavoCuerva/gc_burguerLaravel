@@ -9,8 +9,6 @@
 @section('class_body', 'reserva_body')
 
 @section('content')
-
-<main class="corpo">
         <section class="reservar">
             <h2>Reservar um horário</h2>
             <div class="box-reservar">
@@ -53,6 +51,5 @@
                 </div>
             </div>
         </section><!--Reservar-->
-    </main><!--Corpor-->
 
 @endsection

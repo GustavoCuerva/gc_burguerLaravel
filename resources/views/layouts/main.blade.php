@@ -42,21 +42,21 @@
                     <button><img src="{{ asset('/icons/search-svgrepo-com.svg') }}" alt=""></button>
                 </form>
                 <a><img src="{{ asset('/icons/search-svgrepo-com.svg') }}" class="lupa" alt=""></a>
-                <a href="favoritos.php"><img src="{{ asset('/icons/favorite-svgrepo-com.svg') }}" alt=""></a>
+                <a href="{{ route('favorites') }}"><img src="{{ asset('/icons/favorite-svgrepo-com.svg') }}" alt=""></a>
                     <a onclick="mostrar_opc_usuario()"><img src="{{ asset('/icons/user-svgrepo-com.svg') }}" alt=""></a>
                     <div class="opc_usuario" style="display: none;">
                         <a href="admin/painel.php">Painel admin</a>
                         <a href="meus_dados.php">Meus dados</a>
                         <a href="processos/sair.php">Sair</a>
                     </div>
-                <a href="minhas_reservas.php"><img src="{{ asset('/icons/menu-svgrepo-com.svg') }}" alt=""></a>
+                <a href="{{route('reservations')}}"><img src="{{ asset('/icons/menu-svgrepo-com.svg') }}" alt=""></a>
             </div>
         </div><!--Menu inferior-->
     </header><!--Cabeçalho-->
 
-
-    @yield('content')
-
+    <main class="corpo">
+        @yield('content')
+    </main>
 
     <footer>
         <div class="itens-rodape">

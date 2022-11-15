@@ -18,11 +18,16 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AboutController;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
-Route::get('/reservations/reserve', [ReservationController::class, 'create'])->name('reserve');
+
+Route::prefix('/reservations')->group(function(){
+    Route::get('/reserve', [ReservationController::class, 'create'])->name('reserve');
+    Route::get('/reservations', [ReservationController::class, 'show'])->name('reservations');
+});
 
 Route::prefix('/products')->group(function(){
     Route::get('/menu', [ProductController::class, 'list'])->name('menu');
-    Route::get('/{id}', [ProductController::class, 'show'])->name('product');
+    Route::get('/prod/{id}', [ProductController::class, 'show'])->name('product');
+    Route::get('/favorites', [ProductController::class, 'favorites_list'])->name('favorites');
 });
 
 Route::get('/about', [AboutController::class, 'about'])->name('about');

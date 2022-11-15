@@ -8,8 +8,6 @@
 
 @section('content')
 
-<main class="corpo">
-
 <form action="#" method="post" class="filtro">
     <select name="filtro" id="filtro">
         <option value="1">Tudo</option>
@@ -133,5 +131,4 @@
     </div>
     <p class="mostrar_mais"><span onclick="mostrar(1)">Mostrar Mais</span></p>
 </section><!--Lanches-->
-</main><!--Corpor-->
 @endsection

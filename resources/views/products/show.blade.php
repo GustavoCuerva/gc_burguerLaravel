@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-<main class="corpo">
     <section class="box-produto">
         <div class="info-produto">
             <div class="img">
@@ -89,5 +88,4 @@
             </div>
 
     </section><!--Para você-->
-</main><!--Corpor-->
 @endsection
