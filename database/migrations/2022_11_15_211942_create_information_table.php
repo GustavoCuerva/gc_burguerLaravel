@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('information', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->time('open');
+            $table->time('close');
+            $table->string('address', 150);
+            $table->integer('capacity');
+            $table->integer('tables');
         });
     }
 

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
+            $table->integer('note');
+            $table->text('comment');
             $table->timestamps();
         });
     }
