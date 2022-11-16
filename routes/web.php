@@ -31,6 +31,7 @@ Route::prefix('/products')->group(function(){
 });
 
 Route::get('/about', [AboutController::class, 'about'])->name('about');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

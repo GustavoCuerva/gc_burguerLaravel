@@ -9,17 +9,18 @@
 @section('class_body', 'body_login')
 
 @section('content')
+<main class="corpo">
+
+    <x-jet-validation-errors class="mb-4" />
+
+    @if (session('status'))
+        <div class="mb-4 font-medium text-sm text-green-600">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <section class="login">
         <h2>Login</h2>
-
-        <x-jet-validation-errors class="mb-4" />
-
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-        
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <input type="email" placeholder="exemplo@email.com" name="email" :value="old('email')" required autofocus>
@@ -43,4 +44,5 @@
             </x-jet-button>
         </form>
     </section>
+</main><!--Corpor-->
 @endsection

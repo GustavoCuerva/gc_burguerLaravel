@@ -20,7 +20,7 @@
     margin-bottom: 30px;
 }
 
-.login input{
+.login input, .submit-logar{
     width: 100%;
     margin: 10px 0;
     padding: 10px;
@@ -42,11 +42,12 @@
     height: 30px;
 }
 
-.login input[type=submit]{
+.login input[type=submit], .submit-logar{
     border: none;
     color: white;
     font-weight: bolder;
     background-color: #ff9a00;
+    cursor: pointer;
 }
 
 .login label{
