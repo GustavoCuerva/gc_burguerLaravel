@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('categorys', function (Blueprint $table) {
             $table->id();
             $table->string('category', 100);
             $table->string('path_image', 150);

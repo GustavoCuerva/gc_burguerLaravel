@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->date('date_reservation');
             $table->time('hour');
             $table->integer('amount');
             $table->string('table', 100);
-            $table->boolean('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
