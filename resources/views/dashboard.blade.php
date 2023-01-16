@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt  ">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+@extends('layouts.dashboard_layout')
 
-    <link rel="stylesheet" href="{{asset('/css/style.css')}}" />
-    <link rel="stylesheet" href="{{asset('/css/painel.css')}}" />
-    <title>Hamburgueria GC</title>
-  </head>
-  <body>
+@section('title', 'Painel Admin')
 
+@section('content')
     <a href="../index.php"><img src="{{asset('/icons/home-svgrepo-com.svg')}}" width="20px" style="margin: 10px 0 0 10px;"></a>
 
     <!--Dados principais-->
@@ -58,7 +50,7 @@
         </div>
       </a>
 
-      <a href="categorias.php" style="background-image: url('{{asset('../img/template_hamburguer1.png')}}');">
+      <a href="{{ route('admin.category') }}" style="background-image: url('{{asset('../img/template_hamburguer1.png')}}');">
         <div>
           <h2>Categorias</h2>
         </div>
@@ -108,6 +100,4 @@
         </div>
         <a href="admin_reservas.php">Ver mais</a>
     </section><!--Reservas-->
-    <script src="{{asset('/js/script.js')}}"></script>
-  </body>
-</html>
+@endsection

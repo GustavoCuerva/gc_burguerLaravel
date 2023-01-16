@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CategoryController;
+use App\Models\Product;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
@@ -31,6 +33,10 @@ Route::prefix('/products')->group(function(){
 });
 
 Route::get('/about', [AboutController::class, 'about'])->name('about');
+
+Route::prefix('dashboard')->group(function(){
+    Route::get('/category', [CategoryController::class, 'create'])->name('admin.category');
+});
 
 Route::fallback(function(){
     return view('fallback');
