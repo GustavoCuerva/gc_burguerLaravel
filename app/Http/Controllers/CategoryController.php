@@ -14,7 +14,7 @@ class CategoryController extends Controller
         return view('category.create', ['categories' => $categories]);
     }
 
-    
+
 
     public function show_edit($id){
 
@@ -106,5 +106,14 @@ class CategoryController extends Controller
                 ]);
 
         return redirect('/dashboard/category')->with('msg', 'Categoria editada com sucesso')->with('class', 'success');
+    }
+
+    public function destroy(Request $request){
+
+        $id = $request->id;
+
+        $category = Category::findOrFail($id)->delete();
+
+        return redirect('/dashboard/category')->with('msg', 'Categoria deletada com sucesso')->with('class', 'success');
     }
 }

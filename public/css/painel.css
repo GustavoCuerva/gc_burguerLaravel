@@ -123,6 +123,7 @@ body{
     width: 100%;
     opacity: 0;
     transition: 1s;
+    justify-content: center;
 }
 
 .botao{
@@ -130,6 +131,8 @@ body{
     padding: 10px 20px;
     font-size: 18px;
     margin: 10px;
+    text-align: center;
+    border: none;
 }
 
 .editar{

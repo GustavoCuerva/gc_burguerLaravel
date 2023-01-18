@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Models\Product;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -39,6 +40,7 @@ Route::prefix('dashboard')->group(function(){
     Route::post('/category', [CategoryController::class, 'store'])->middleware('auth')->name('store.category');
     Route::get('/category/{id}', [CategoryController::class, 'show_edit'])->middleware('auth')->name('edit.category');
     Route::put('/category', [CategoryController::class, 'update'])->middleware('auth')->name('store.category');
+    Route::delete('/category', [CategoryController::class, 'destroy'])->middleware('auth')->name('del.category');
 });
 
 Route::fallback(function(){
@@ -50,7 +52,5 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware('auth')->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 });
