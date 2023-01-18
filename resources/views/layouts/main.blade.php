@@ -46,15 +46,18 @@
                     @if (Auth::check())
                         <a onclick="mostrar_opc_usuario()"><img src="{{ asset('/icons/user-svgrepo-com.svg') }}" alt=""></a>
                             <div class="opc_usuario" style="display: none;">
-                                <a href="admin/painel.php">Painel admin</a>
-                                <a href="meus_dados.php">Meus dados</a>
-                                <a href="processos/sair.php">Sair</a>
+                                <a href="{{ route('dashboard') }}">Painel admin</a>
+                                <a href="{{--route('my-data')--}}">Meus dados</a>
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <a href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
+                                </form>
                             </div>
                     @else
                         <a href="{{ route('login') }}"><img src="{{ asset('/icons/user-svgrepo-com.svg') }}" alt=""></a>
                     @endif
                     
-                <a href="{{route('reservations')}}"><img src="{{ asset('/icons/menu-svgrepo-com.svg') }}" alt=""></a>
+                <a href="{{route('reserves')}}"><img src="{{ asset('/icons/menu-svgrepo-com.svg') }}" alt=""></a>
             </div>
         </div><!--Menu inferior-->
     </header><!--Cabeçalho-->

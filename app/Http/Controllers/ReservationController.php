@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class ReservationController extends Controller
 {
     public function create(){
-        return view('reservations.reserve');
+        return view('reserves.reserve');
     }
 
     public function show(){
-        return view('reservations.show');
+        return view('reserves.show');
     }
 }

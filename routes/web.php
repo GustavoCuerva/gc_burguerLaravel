@@ -21,21 +21,22 @@ use App\Models\Product;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
-Route::prefix('/reservations')->group(function(){
+Route::prefix('/reserves')->group(function(){
     Route::get('/reserve', [ReservationController::class, 'create'])->name('reserve');
-    Route::get('/reservations', [ReservationController::class, 'show'])->name('reservations');
+    Route::get('/reserves', [ReservationController::class, 'show'])->middleware('auth')->name('reserves');
 });
 
 Route::prefix('/products')->group(function(){
     Route::get('/menu', [ProductController::class, 'list'])->name('menu');
     Route::get('/prod/{id}', [ProductController::class, 'show'])->name('product');
-    Route::get('/favorites', [ProductController::class, 'favorites_list'])->name('favorites');
+    Route::get('/favorites', [ProductController::class, 'favorites_list'])->middleware('auth')->name('favorites');
 });
 
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 Route::prefix('dashboard')->group(function(){
-    Route::get('/category', [CategoryController::class, 'create'])->name('admin.category');
+    Route::get('/category', [CategoryController::class, 'create'])->middleware('auth')->name('admin.category');
+    Route::post('/category', [CategoryController::class, 'store'])->middleware('auth')->name('store.category');
 });
 
 Route::fallback(function(){
@@ -49,5 +50,5 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->middleware('auth')->name('dashboard');
 });
