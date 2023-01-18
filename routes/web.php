@@ -37,6 +37,8 @@ Route::get('/about', [AboutController::class, 'about'])->name('about');
 Route::prefix('dashboard')->group(function(){
     Route::get('/category', [CategoryController::class, 'create'])->middleware('auth')->name('admin.category');
     Route::post('/category', [CategoryController::class, 'store'])->middleware('auth')->name('store.category');
+    Route::get('/category/{id}', [CategoryController::class, 'show_edit'])->middleware('auth')->name('edit.category');
+    Route::put('/category', [CategoryController::class, 'update'])->middleware('auth')->name('store.category');
 });
 
 Route::fallback(function(){
