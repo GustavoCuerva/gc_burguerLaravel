@@ -5,13 +5,16 @@
 @section('content')
 <a href="{{route('dashboard')}}"><img src="{{asset('/icons/backward-svgrepo-com.svg')}}" style="margin-top: 30px; margin-left:30px;" width="25px"></a>
 <main class="corpo">
-
+    @php
+        $selected = ['', '', '', ''];
+        $selected[$id] = 'Selected';
+    @endphp
     <form action="#" method="post" class="filtro">
         <select name="filtro" id="filtro" onchange="filtro_reservas(this.value)">
-            <option value="0">Tudo</option>
-            <option value="1">Hoje</option>
-            <option value="2">Essa Semana</option>
-            <option value="3">Esse Mês</option>
+            <option value="0" {{$selected[0]}}>Tudo</option>
+            <option value="1" {{$selected[1]}}>Hoje</option>
+            <option value="2" {{$selected[2]}}>Essa Semana</option>
+            <option value="3" {{$selected[3]}}>Esse Mês</option>
         </select>
     </form>
 
