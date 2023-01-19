@@ -10,6 +10,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'itens' => 'array'
+    ];
+
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -17,4 +21,7 @@ class Product extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    protected $dates = ['date'];
+    protected $guarded = [];
 }

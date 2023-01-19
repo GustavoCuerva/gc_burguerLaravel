@@ -5,10 +5,10 @@
 @section('content')
 
     @php
-        $name = ''; $description = ''; $img = '/img/Logo2.png'; $value = ''; $required = ''; $route = 'store.products';
+        $name = ''; $description = ''; $img = '/img/Logo2.png'; $value = ''; $required = 'required'; $route = 'store.products';
         
         if (isset($product)) {
-            $name = $product->name; $description = $product->description; $img = $product->path_image; $value = $product->value; $required = 'required'; $route = 'update.products'; $id = $product->category_id;
+            $name = $product->name; $description = $product->description; $img = $product->path_image; $value = $product->value; $required = ''; $route = 'update.products'; $id = $product->category_id;
         }
     @endphp
 
@@ -75,7 +75,7 @@
 
                     <div class="box-form">
                         <label for="descricao">Descrição: </label>
-                        <textarea name="description" id="descricao" placeholder="Descrição" value="{{ $description }}" required></textarea>
+                        <textarea name="description" id="descricao" placeholder="Descrição" required>{{ $description }}</textarea>
                     </div>
 
                     <div class="box-form">
@@ -86,9 +86,15 @@
                     <div>
                         <input type="submit" name="enviar" value="Salvar" class="enviar" style="color: white;">
                     </div>
-                    {{-- <div>
-                        <a onclick="alerta_excluir(3)" class="btn del" style="color: white; cursor: pointer; background-color: #ff0000d9;">Excluir</a>
-                    </div> --}}
+
+                    @if (isset($product))
+                        @method('PUT')
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <div>
+                            <a onclick="alerta_excluir(3)" class="btn del w-100 br-20" style="color: white; cursor: pointer; background-color: #ff0000d9;">Excluir</a>
+                        </div>
+                    @endif
+                    
                 </div>
             </form>
         </div>

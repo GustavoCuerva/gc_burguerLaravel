@@ -95,6 +95,54 @@ class ProductController extends Controller
         $categories = Category::all();
 
         return view('products.create', ['product' => $product, 'categories' => $categories]);
+    }
+
+    public function update(Request $request){
+
+        $product_ver = Product::where('name', $request->name)->where('id', '!=', $request->id);
+
+        if ($product_ver->count()>0) {
+            return back()->with('msg', 'Produto com mesmo nome já existe')->with('class', 'danger');
+        }
+
+        $product = Product::findOrFail($request->id);
+
+        $path_image = $product->path_image;
+
+        // Alteração da imagem
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            // Houve o envio de imagem
+
+            $image = $request->image;
+            $extension = $image->extension();
+
+            if ($extension != 'webp' && $extension != 'jpg' && $extension != 'png') {
+                // Extensão incorreta
+                return back()->with('msg', 'Extensão '.$extension.' inválida, envie apenas imagens')->with('class', 'danger');
+            }
+
+            $imgName = $request->name.'_'.md5($image->getClientOriginalName() . strtotime('now')).".".$extension;
+
+            $image->move(public_path('img/products/'), $imgName);
+
+            // Excluindo arquivo anterior
+            if(file_exists(public_path($path_image))){
+                unlink(public_path($path_image));
+            }
+
+            $path_image = "/img/products/".$imgName;
+        }
+
+        $update = Product::findOrFail($request->id)
+        ->update([
+            'name'        => $request->name,
+            'description' => $request->description,
+            'value'       => $request->value,
+            'path_image'  => $path_image,
+            'category_id' => $request->category
+        ]);
+
+        return redirect('dashboard/products/'.$request->category)->with('msg', 'Produto editado com sucesso')->with('class', 'success');
 
     }
 }
