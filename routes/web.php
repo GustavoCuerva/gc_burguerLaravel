@@ -49,6 +49,7 @@ Route::prefix('dashboard')->group(function(){
     Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->middleware('auth')->name('edit.products');
     Route::post('/products/create', [ProductController::class, 'store'])->middleware('auth')->name('store.products');
     Route::put('/products/update', [ProductController::class, 'update'])->middleware('auth')->name('update.products');
+    Route::delete('/products', [ProductController::class, 'destroy'])->middleware('auth')->name('delete.products');
 });
 
 Route::fallback(function(){

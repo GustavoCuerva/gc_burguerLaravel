@@ -12,19 +12,23 @@
         }
     @endphp
 
+    @isset($product)
     <div class="modal_alerta" style="display: none;">
         <div>
-            <form action="../processos/proc_produto.php?x=" method="post">
+            <form action="{{ route('delete.products') }}" method="post">
+                @csrf
+                @method('DELETE')
                 <h2>Tem certeza que deseja excluir o produto?</h2>
                 <p>Essa ação não poderá ser desfeita.</p>
                 <p>Se desejar continuar clique em excluir.</p>
-                <input type="hidden" name="excluir" value="excluir">
-                <span style="background-color: blue;" onclick="alerta_excluir(1)">Cancelar</span>
-                <button style="background-color: red;">Excluir</button>
+                <input type="hidden" name="id" value="{{ $product->id }}">
+                <span onclick="alerta_excluir(1)" class="btn btn-primary">Cancelar</span>
+                <button class="btn btn-danger">Excluir</button>
             </form>
         </div>
     </div>
-
+    @endisset
+    
     <section class="admin_produto">
         <div class="form_produto">
             <div style="display: flex; width:100%;">

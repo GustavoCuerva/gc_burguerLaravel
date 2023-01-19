@@ -109,11 +109,19 @@ class CategoryController extends Controller
     }
 
     public function destroy(Request $request){
-
         $id = $request->id;
 
-        $category = Category::findOrFail($id)->delete();
+        $category = Category::findOrFail($id);
 
-        return redirect('/dashboard/category')->with('msg', 'Categoria deletada com sucesso')->with('class', 'success');
+        $path_image = $category->path_image;
+
+        // Excluindo arquivo de imagem
+        if(file_exists(public_path($path_image))){
+            unlink(public_path($path_image));
+        }
+
+        Category::findOrFail($id)->delete();
+
+        return redirect('/dashboard/category')->with('msg', 'Categoria deletada com sucesso')->with('class', 'secondary');
     }
 }

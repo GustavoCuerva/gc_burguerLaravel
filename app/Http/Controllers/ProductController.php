@@ -145,4 +145,22 @@ class ProductController extends Controller
         return redirect('dashboard/products/'.$request->category)->with('msg', 'Produto editado com sucesso')->with('class', 'success');
 
     }
+
+    public function destroy(Request $request){
+
+        $id = $request->id;
+
+        $product = Product::findOrFail($id);
+
+        $path_image = $product->path_image;
+
+        // Excluindo arquivo de imagem
+        if(file_exists(public_path($path_image))){
+            unlink(public_path($path_image));
+        }
+
+        Product::findOrFail($id)->delete();
+
+        return redirect('dashboard/products/tudo')->with('msg', 'Produto excluido com sucesso')->with('class', 'secondary');
+    }
 }
