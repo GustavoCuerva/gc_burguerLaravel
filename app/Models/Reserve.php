@@ -12,4 +12,11 @@ class Reserve extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    protected $casts = [
+        'itens' => 'array'
+    ];
+    
+    protected $dates = ['date'];
+    protected $guarded = [];
 }

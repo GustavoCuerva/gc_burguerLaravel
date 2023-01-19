@@ -3,7 +3,15 @@
 @section('title', 'Painel Admin')
 
 @section('content')
-    <a href="../index.php"><img src="{{asset('/icons/home-svgrepo-com.svg')}}" width="20px" style="margin: 10px 0 0 10px;"></a>
+    <a href="/"><img src="{{asset('/icons/home-svgrepo-com.svg')}}" width="20px" style="margin: 10px 0 0 10px;"></a>
+
+    @if (session('msg'))
+        <div class="container">
+            <div class="alert alert-{{session('class')}}" role="alert">
+                {{ session('msg') }}
+            </div>
+        </div>
+    @endif
 
     <!--Dados principais-->
     <section class="dados_principais">
@@ -41,18 +49,18 @@
     <!--Informações da empresa-->
     <section class="informacoes_empresa">
       <div>
-        <p><strong>Horário:</strong> 18:00 ás 19:00</p>
+        <p><strong>Horário:</strong> {{ date("H:i", strtotime($info->open))}} ás {{ date("H:i", strtotime($info->close))}}</p>
 
         <p><strong>Localização: </strong></p>
-        <p></p>
+        <p>{{$info->address}}</p>
 
-        <p><strong>Capacidade: </strong> 25 Pessoas</p>
+        <p><strong>Capacidade: </strong> {{$info->capacity}} Pessoas</p>
 
-        <p><strong>Mesas:</strong> 5</p>
+        <p><strong>Mesas:</strong> {{$info->tables}}</p>
       </div>
 
       <div>
-        <a href="admin_info.php">Editar</a>
+        <a href="{{ route('information') }}">Editar</a>
       </div>
     </section>
     <!--Informações da empresa-->
@@ -60,24 +68,16 @@
     <section class="secao_reservas">
         <h2 class="h2-reservas">Reservas</h2>
             <div class="reservas">
-              <div class="box-reserva">
-                          <h2>19/11 - 20:00</h2>
-                          <p><strong>Status:</strong> <span class="status">Confirmada</span></p>
-                          <p><strong>Detalhes:</strong> <span class="detalhes">12</span> | <span class="detalhes"> 5 Pessoas</span></p>
-                          <p><strong>Nome:</strong> <span class="detalhes">Gustavo</span></p>
-                  </div>
-              </div>
-            </div>
-
-        <div class="reservas">
-            <div class="box-reserva">
-                        <h2>14/10 - 18:00</h2>
-                        <p><strong>Status:</strong> <span class="status">Confirmada</span></p>
-                        <p><strong>Detalhes:</strong> <span class="detalhes">Mesa 2</span> | <span class="detalhes">6 Pessoas</span></p>
-                        <p><strong>Nome:</strong> <span class="detalhes">Gustavo Candido Cuerva</span></p>
+              @foreach ($reserves as $reserve)
+                <div class="box-reserva">
+                  <h2>{{$reserve->date_reservation}} - {{$reserve->hour}}</h2>
+                  <p><strong>Status:</strong> <span class="status">{{$reserve->status}}</span></p>
+                  <p><strong>Detalhes:</strong> <span class="detalhes">{{$reserve->table}}</span> | <span class="detalhes"> {{$reserve->amount}} Pessoas</span></p>
+                  <p><strong>Nome:</strong> <span class="detalhes">{{$reserve->user_id}}</span></p>
                 </div>
+              @endforeach
+              
             </div>
-        </div>
-        <a href="admin_reservas.php">Ver mais</a>
+        <a href="{{route('reserves.admin', ['id' => 0])}}">Ver mais</a>
     </section><!--Reservas-->
 @endsection

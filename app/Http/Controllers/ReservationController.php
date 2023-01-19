@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reserve;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -12,5 +13,11 @@ class ReservationController extends Controller
 
     public function show(){
         return view('reserves.show');
+    }
+
+    public function showAdmin($id){
+        $reserves = Reserve::all();
+
+        return view('reservations.dashboard', ['reserves' => $reserves]);
     }
 }

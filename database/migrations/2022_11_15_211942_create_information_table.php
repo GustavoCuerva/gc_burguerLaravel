@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address', 150);
             $table->integer('capacity');
             $table->integer('tables');
+            $table->timestamps();
         });
     }
 

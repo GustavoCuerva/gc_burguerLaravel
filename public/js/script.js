@@ -119,7 +119,7 @@ function filtro_categorias() {
 
 function filtro_reservas(i) {
   // c = document.getElementById("filtro").value;
-  window.location.href = "admin_reservas.php?f="+i;
+  window.location.href = i;
 }
 
 // Filtro salvos

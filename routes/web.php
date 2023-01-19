@@ -18,6 +18,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InformationController;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
@@ -50,6 +51,13 @@ Route::prefix('dashboard')->group(function(){
     Route::post('/products/create', [ProductController::class, 'store'])->middleware('auth')->name('store.products');
     Route::put('/products/update', [ProductController::class, 'update'])->middleware('auth')->name('update.products');
     Route::delete('/products', [ProductController::class, 'destroy'])->middleware('auth')->name('delete.products');
+
+    // Information
+    Route::get('/information', [InformationController::class, 'edit'])->middleware('auth')->name('information');
+    Route::put('/information', [InformationController::class, 'update'])->middleware('auth')->name('information');
+
+    // Reserves
+    Route::get('/reserves/{id}', [ReservationController::class, 'showAdmin'])->middleware('auth')->name('reserves.admin');
 });
 
 Route::fallback(function(){
