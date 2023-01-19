@@ -8,7 +8,7 @@
     <!--Dados principais-->
     <section class="dados_principais">
       <div>
-        <h3></h3>
+        <h3>{{ $total }}</h3>
         <p>Reservas Totais</p>
       </div>
 
@@ -22,35 +22,15 @@
     <!--Produtos-->
     <section class="produtos">
 
-    
-      <a href="admin_produtos.php?c=" style="background-image: url('{{asset('/img/categoria/combos.jpg')}}');">
-        <div>
-          <h2>Teste</h2>
-        </div>
-      </a>
-    
-      <a href="admin_produtos.php?c=" style="background-image: url('{{asset('/img/categoria/combos.jpg')}}');">
-        <div>
-          <h2>Teste</h2>
-        </div>
-      </a>
-      <a href="admin_produtos.php?c=" style="background-image: url('{{asset('/img/categoria/combos.jpg')}}');">
-        <div>
-          <h2>Teste</h2>
-        </div>
-      </a>
-      <a href="admin_produtos.php?c=" style="background-image: url('{{asset('/img/categoria/combos.jpg')}}');">
-        <div>
-          <h2>Teste</h2>
-        </div>
-      </a>
-      <a href="admin_produtos.php?c=" style="background-image: url('{{asset('/img/categoria/combos.jpg')}}');">
-        <div>
-          <h2>Teste</h2>
-        </div>
-      </a>
+      @foreach ($categories as $category)
+        <a href="{{ route('admin.products', ['id' => $category->id]) }}" style="background-image: url('{{asset($category->path_image)}}');">
+          <div>
+            <h2>{{ $category->category }}</h2>
+          </div>
+        </a>
+      @endforeach
 
-      <a href="{{ route('admin.category') }}" style="background-image: url('{{asset('../img/template_hamburguer1.png')}}');">
+      <a href="{{ route('admin.category')}}" style="background-image: url('{{asset('../img/template_hamburguer1.png')}}');">
         <div>
           <h2>Categorias</h2>
         </div>

@@ -112,7 +112,7 @@ function alerta_excluir(i, m) {
 
 function filtro_categorias() {
   c = document.getElementById("filtro").value;
-  window.location.href = "admin_produtos.php?c="+c;
+  window.location.href = c;
 }
 
 // Filtro reservas

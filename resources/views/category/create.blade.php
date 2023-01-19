@@ -4,12 +4,6 @@
     
 @section('content')
 
-    {{-- <form action="{{ route('del.category')}}" method="post">
-        @csrf
-        @method('DELETE')
-        <input type="submit" class="excluir botao" value="Excluir">
-    </form> --}}
-
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">

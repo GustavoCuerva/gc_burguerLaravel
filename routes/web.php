@@ -18,7 +18,6 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-use App\Models\Product;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
@@ -36,11 +35,20 @@ Route::prefix('/products')->group(function(){
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 Route::prefix('dashboard')->group(function(){
+    
+    // Category
     Route::get('/category', [CategoryController::class, 'create'])->middleware('auth')->name('admin.category');
-    Route::post('/category', [CategoryController::class, 'store'])->middleware('auth')->name('store.category');
     Route::get('/category/{id}', [CategoryController::class, 'show_edit'])->middleware('auth')->name('edit.category');
+    Route::post('/category', [CategoryController::class, 'store'])->middleware('auth')->name('store.category');
     Route::put('/category', [CategoryController::class, 'update'])->middleware('auth')->name('store.category');
     Route::delete('/category', [CategoryController::class, 'destroy'])->middleware('auth')->name('del.category');
+
+    // Products
+    Route::get('/products/{id}', [ProductController::class, 'listProducts'])->middleware('auth')->name('admin.products');
+    Route::get('/products/create/{id}', [ProductController::class, 'create'])->middleware('auth')->name('create.products');
+    Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->middleware('auth')->name('edit.products');
+    Route::post('/products/create', [ProductController::class, 'store'])->middleware('auth')->name('store.products');
+    Route::post('/products/update', [ProductController::class, 'update'])->middleware('auth')->name('update.products');
 });
 
 Route::fallback(function(){
