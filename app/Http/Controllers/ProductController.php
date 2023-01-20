@@ -19,12 +19,18 @@ class ProductController extends Controller
         return view('welcome');
     }
 
-    public function list(){
-        $categories = Category::all();
+    // Menu de lanches
+    public function list($id){
+        $cats = Category::all();
+        if ($id != 'tudo') {
+            $categories = Category::where('id', $id)->get();
+            $products = Product::where('category_id', $id)->get();
+        }else{
+            $categories = Category::all();
+            $products = Product::all();
+        }
 
-        $products = Product::all();
-
-        return view('products.menu', ['categories' => $categories, 'products' => $products]);
+        return view('products.menu', ['cats' => $cats, 'categories' => $categories, 'products' => $products, 'id' => $id]);
     }
 
     public function show($id){

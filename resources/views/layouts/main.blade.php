@@ -22,7 +22,7 @@
                 <a href="{{route('reserve')}}"><li>RESERVAR</li></a>
             </ul>
             <ul>
-                <a href="{{route('menu')}}"><li>MENU</li></a>
+                <a href="{{route('menu', ['id'=>'tudo'])}}"><li>MENU</li></a>
                 <a href="{{route('about')}}"><li>SOBRE NÓS</li></a>
             </ul>
         </nav><!--Menu-->
