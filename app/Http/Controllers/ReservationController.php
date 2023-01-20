@@ -5,17 +5,54 @@ namespace App\Http\Controllers;
 use App\Models\Information;
 use App\Models\Reserve;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ReservationController extends Controller
 {
+
+    // Formulário para reserva
     public function create(){
         return view('reserves.reserve');
     }
 
+    // Lista de suas reservas
     public function show(){
-        return view('reserves.show');
+        /* It's updating the status of the reserves that are in the past to 3, which means that the
+        reserve is expired. */
+        // Comando altomatico programado, retirar esse trecho ao colocar no servidor e configurar.
+        Reserve::where('date_reservation', '<', date('Y-m-d'))
+        ->where('status', '<>', '3')
+        ->update([
+            'status' => 3
+        ]);
+
+        $next_reserves = Reserve::where('status', '<', 2)
+                                ->where('user_id', auth()->user()->id)
+                                ->orderBy('date_reservation')->get();
+        $historic = Reserve::where('status', '>', 1)
+                            ->where('user_id', auth()->user()->id)
+                            ->orderBy('date_reservation')->get();
+
+        $data_inicial = request('data_inicial');
+        $data_final = request('data_final');
+
+        if ($data_inicial) {
+            $next_reserves = Reserve::where('status', '<', 2)
+                                ->whereBetween('date_reservation', [$data_inicial, $data_final])
+                                ->where('user_id', auth()->user()->id)
+                                ->orderBy('date_reservation')->get();
+            $historic = Reserve::where('status', '>', 1)
+                                ->whereBetween('date_reservation', [$data_inicial, $data_final])
+                                ->where('user_id', auth()->user()->id)
+                                ->orderBy('date_reservation')->get();   
+        }
+
+        $status = ['A confirmar', 'Confirmada', 'Cancelada', 'Vencida'];
+        
+        return view('reserves.show', ['next_reserves' => $next_reserves, 'historic' => $historic,'status' => $status]);
     }
 
+    // Salvar reserva
     public function store(Request $request){
         
         $data = date("Y-m-d", strtotime($request->data));
@@ -81,8 +118,58 @@ class ReservationController extends Controller
 
     }
 
+    // Confirmar Reserva
+    public function confirm(Request $request){
+
+        $reserve = Reserve::findOrFail($request->id);
+
+        if ($reserve->user_id != auth()->user()->id) {
+            // Usuario não é dono da reserva
+            return back();
+        }
+
+        $reserve->update([
+            'status' => 1
+        ]);
+
+        return back()->with('msg', 'Reserva confirmada')->with('class', 'success');
+    }
+
+    // Confirmar Reserva
+    private function vencida(){
+
+        
+    }
+
+    // Cancelar Reserva
+    public function cancel(Request $request){
+
+        $reserve = Reserve::findOrFail($request->id);
+
+        if ($reserve->user_id != auth()->user()->id) {
+            // Usuario não é dono da reserva
+            return back();
+        }
+
+        $reserve->update([
+            'status' => 2
+        ]);
+
+        return back()->with('msg', 'Reserva cancelada')->with('class', 'secondary');
+    }
+
+    // Listar reservas no painel admin
     public function showAdmin($id){
         
+        /* It's updating the status of the reserves that are in the past to 3, which means that the
+        reserve is expired. */
+        // Comando altomatico programado, retirar esse trecho ao colocar no servidor e configurar.
+        Reserve::where('date_reservation', '<', date('Y-m-d'))
+        ->where('status', '<>', '3')
+        ->update([
+            'status' => 3
+        ]);
+
         $reserves = Reserve::join('users', 'users.id', '=', 'reserves.user_id')
                         ->orderBy('date_reservation', 'desc')
                         ->get();

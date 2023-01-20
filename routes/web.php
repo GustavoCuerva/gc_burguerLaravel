@@ -26,6 +26,8 @@ Route::prefix('/reserves')->group(function(){
     Route::get('/', [ReservationController::class, 'create'])->name('reserve');
     Route::get('/reserves', [ReservationController::class, 'show'])->middleware('auth')->name('reserves');
     Route::post('/reserve', [ReservationController::class, 'store'])->middleware('auth')->name('reserve.store');
+    Route::put('/confirm', [ReservationController::class, 'confirm'])->middleware('auth')->name('reserve.confirm');
+    Route::put('/cancel', [ReservationController::class, 'cancel'])->middleware('auth')->name('reserve.cancel');
 });
 
 Route::prefix('/products')->group(function(){

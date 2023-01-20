@@ -132,7 +132,7 @@ input[type=submit]{
 
 .informacoes_reserva button{
     width: 100%;
-    padding: 10px 0;
+    padding: 10px 10px;
     border: none;
     color: white;
     margin-bottom: 5px;

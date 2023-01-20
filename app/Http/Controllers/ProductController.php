@@ -4,17 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Saved;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Catch_;
 
 class ProductController extends Controller
 {
     public function index(){
+
+        /* Inicio dos favoritos
+        $favoritos = Saved::groupBy('product_id')
+                    ->join('contacts', 'users.id', '=', 'contacts.user_id')
+                    ->orderBy(count('product_id'), 'desc');*/
         return view('welcome');
     }
 
     public function list(){
-        return view('products.menu');
+        $categories = Category::all();
+
+        $products = Product::all();
+
+        return view('products.menu', ['categories' => $categories, 'products' => $products]);
     }
 
     public function show($id){

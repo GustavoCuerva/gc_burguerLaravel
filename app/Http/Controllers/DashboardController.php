@@ -10,7 +10,15 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
-
+        /* It's updating the status of the reserves that are in the past to 3, which means that the
+        reserve is expired. */
+        // Comando altomatico programado, retirar esse trecho ao colocar no servidor e configurar.
+        Reserve::where('date_reservation', '<', date('Y-m-d'))
+        ->where('status', '<>', '3')
+        ->update([
+            'status' => 3
+        ]);
+        
         $categories = Category::all();
         $reserves   = Reserve::all();
         $reserves_destaque = Reserve::where('date_reservation', '>=', date('Y-m-d'))
