@@ -32,7 +32,7 @@ Route::prefix('/reserves')->group(function(){
 
 Route::prefix('/products')->group(function(){
     Route::get('/menu/{id}', [ProductController::class, 'list'])->name('menu');
-    Route::get('/prod/{id}', [ProductController::class, 'show'])->name('product');
+    Route::get('/product/{id}', [ProductController::class, 'show'])->name('product');
     Route::get('/favorites', [ProductController::class, 'favorites_list'])->middleware('auth')->name('favorites');
 });
 

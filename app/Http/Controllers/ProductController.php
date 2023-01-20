@@ -33,8 +33,15 @@ class ProductController extends Controller
         return view('products.menu', ['cats' => $cats, 'categories' => $categories, 'products' => $products, 'id' => $id]);
     }
 
+    // Produto individual
     public function show($id){
-        return view('products.show');
+
+        $product = Product::findOrFail($id);
+        $suggestions = Product::where('category_id', $product->category_id)
+                        ->where('id', '!=', $id)
+                        ->limit(4)->get();
+
+        return view('products.show', ['product' => $product, 'suggestions' => $suggestions]);
     }
 
     // Favoritos
@@ -42,6 +49,7 @@ class ProductController extends Controller
         return view('products.favorites');
     }
 
+    // Menu Admin
     public function listProducts($id){
 
         $categories = Category::all();
@@ -55,6 +63,7 @@ class ProductController extends Controller
         return view('products.listAdmin', ['categories' => $categories, 'products' => $products, 'id' => $id]);
     }
 
+    // Formulario de criacao do produto
     public function create($id){
 
         $categories = Category::all();
@@ -62,6 +71,7 @@ class ProductController extends Controller
         return view('products.create', ['id' => $id, 'categories' => $categories]);
     }
 
+    // Salvar o produto no banco
     public function store(Request $resquest){
 
         // Verificando se já existe
@@ -105,6 +115,7 @@ class ProductController extends Controller
         return redirect('dashboard/products/'.$resquest->category)->with('msg', 'Produto cadastrado com sucesso')->with('class', 'success');
     }
 
+    // Edição do produto
     public function edit($id){
 
         $product = Product::findOrFail($id);
@@ -113,6 +124,7 @@ class ProductController extends Controller
         return view('products.create', ['product' => $product, 'categories' => $categories]);
     }
 
+    // Update para o banco
     public function update(Request $request){
 
         $product_ver = Product::where('name', $request->name)->where('id', '!=', $request->id);
@@ -162,6 +174,7 @@ class ProductController extends Controller
 
     }
 
+    // Excluir produto
     public function destroy(Request $request){
 
         $id = $request->id;
