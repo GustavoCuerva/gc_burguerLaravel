@@ -37,7 +37,7 @@
             <div class="informacoes_reserva">
                 <div class="info">
                     <p><strong>Status:</strong> <span class="status">{{$status[$reserve->status]}}</span></p>
-                    <p><strong>Detalhes:</strong> <span class="detalhes">{{$reserve->table}}</span> | <span class="detalhes"> {{$reserve->amount}} Pessoas</p>
+                    <p><strong>Detalhes:</strong> <span class="detalhes">Mesa: {{$reserve->table}}</span> | <span class="detalhes"> {{$reserve->amount}} Pessoas</p>
                 </div>
 
                 <div class="btns">

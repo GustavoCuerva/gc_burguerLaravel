@@ -128,17 +128,22 @@ class ReservationController extends Controller
             return back();
         }
 
+        // Buscando mesa disponivel
+        $tables = Reserve::where('status', 1)->where('date_reservation', $reserve->date_reservation)->get();
+        $mesa = 1;
+
+        foreach ($tables as $key => $value) {
+            if (intval($value->table) == $mesa) {
+                $mesa++;
+            }
+        }
+
         $reserve->update([
-            'status' => 1
+            'status' => 1,
+            'table' => $mesa
         ]);
 
         return back()->with('msg', 'Reserva confirmada')->with('class', 'success');
-    }
-
-    // Confirmar Reserva
-    private function vencida(){
-
-        
     }
 
     // Cancelar Reserva
@@ -152,7 +157,8 @@ class ReservationController extends Controller
         }
 
         $reserve->update([
-            'status' => 2
+            'status' => 2,
+            'table' => 'Cancelada'
         ]);
 
         return back()->with('msg', 'Reserva cancelada')->with('class', 'secondary');
