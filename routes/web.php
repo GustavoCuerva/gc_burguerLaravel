@@ -23,8 +23,9 @@ use App\Http\Controllers\InformationController;
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
 Route::prefix('/reserves')->group(function(){
-    Route::get('/reserve', [ReservationController::class, 'create'])->name('reserve');
+    Route::get('/', [ReservationController::class, 'create'])->name('reserve');
     Route::get('/reserves', [ReservationController::class, 'show'])->middleware('auth')->name('reserves');
+    Route::post('/reserve', [ReservationController::class, 'store'])->middleware('auth')->name('reserve.store');
 });
 
 Route::prefix('/products')->group(function(){

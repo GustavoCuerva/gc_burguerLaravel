@@ -15,7 +15,20 @@ class DashboardController extends Controller
         $reserves   = Reserve::all();
         $reservas_total = $reserves->count();
         $information = Information::findOrFail(1);
+        $reserves_today = Reserve::where('date_reservation', date('Y-m-d'));
+        $quant = 0;
 
-        return view('dashboard', ['categories' => $categories, 'total' => $reservas_total, 'info' => $information, 'reserves' => $reserves]);
+        foreach ($reserves_today as $key => $value) {
+            // Pegando quantidade de pessoas agendadas para o dia
+            $quant += $value->amount;
+        }
+
+        return view('dashboard', [
+            'categories' => $categories, 
+            'total' => $reservas_total, 
+            'info' => $information, 
+            'reserves' => $reserves,
+            'quant' => $quant
+        ]);
     }
 }

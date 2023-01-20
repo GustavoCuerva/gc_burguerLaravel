@@ -8,6 +8,7 @@
     @yield('styles')
 
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>GC Burguer - @yield('title')</title>
 </head>
 <body class="@yield('class_body')">
@@ -30,9 +31,9 @@
             <div class="endereco">
                 <img src="{{ asset('/icons/location-svgrepo-com.svg') }}" class="localizacao_img">
                 <div class="endereco_rua">
-                    <p>Avenida Paulista 2222 </p>
-                    <p>São Paulo-SP</p>
-                    <p><strong>CEP:</strong> 00000000000</p>
+                    Avenida Paulista 2222<br>
+                    São Paulo-SP<br>
+                    <strong>CEP:</strong> 00000000000<br>
                 </div><!--Endereco-->
             </div>
 

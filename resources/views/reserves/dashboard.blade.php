@@ -23,7 +23,7 @@
         <div class="reservas">
             @foreach ($reserves as $reserve)
                 <div class="box-reserva">
-                <h2>{{$reserve->date_reservation}} - {{$reserve->hour}}</h2>
+                <h2>{{date("d/m/Y", strtotime($reserve->date_reservation))}} - {{date("H:i", strtotime($reserve->hour))}}</h2>
                 <p><strong>Status:</strong> <span class="status">{{$reserve->status}}</span></p>
                 <p><strong>Detalhes:</strong> <span class="detalhes">{{$reserve->table}}</span> | <span class="detalhes"> {{$reserve->amount}} Pessoas</span></p>
                 <p><strong>Nome:</strong> <span class="detalhes">{{$reserve->user_id}}</span></p>

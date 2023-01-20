@@ -11,12 +11,20 @@
 @section('content')
         <section class="reservar">
             <h2>Reservar um horário</h2>
+            @if (session('msg'))
+                <div class="container">
+                    <div class="alert alert-{{session('class')}}" role="alert">
+                        {{ session('msg') }}
+                    </div>
+                </div>
+            @endif
             <div class="box-reservar">
                 <div>
                     <img src="{{ asset('/img/Logo2.png') }}" alt="">
                 </div>
                 <div>
-                    <form action="#" method="post" class="form_reserva">
+                    <form action="{{ route('reserve.store') }}" method="post" class="form_reserva">
+                        @csrf
                         <div>
                             <label for="unidade">Unidade:</label>
                             <input type="text" name="unidade" value="Avenida Paulista 2222 - São Paulo-SP" disabled>
