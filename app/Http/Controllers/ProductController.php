@@ -41,7 +41,33 @@ class ProductController extends Controller
                         ->where('id', '!=', $id)
                         ->limit(4)->get();
 
-        return view('products.show', ['product' => $product, 'suggestions' => $suggestions]);
+        $saved = Saved::where('product_id', $id)->where('user_id', auth()->user()->id)->get();
+        $count = $saved->count();
+
+        return view('products.show', ['product' => $product, 'suggestions' => $suggestions, 'count' => $count]);
+    }
+
+    // Salvando produto
+    public function saved(Request $request){
+        $saved = Saved::where('product_id', $request->id)->where('user_id', auth()->user()->id);
+        $count = $saved->count();
+        
+        if ($count == 0) {
+            // Adicionar
+            $save = new Saved;
+
+            $save->product_id = $request->id;
+            $save->user_id = auth()->user()->id;
+
+            $save->save();
+
+            return back()->with('msg', 'Produto adicionado aos favoritos')->with('class', 'success');
+        }else if ($count > 0) {
+
+            $saved->delete();
+            return back()->with('msg', 'Produto removido dos favoritos')->with('class', 'secondary');
+        }
+        return back();
     }
 
     // Favoritos

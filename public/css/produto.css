@@ -12,6 +12,7 @@
 }
 
 .img{
+    flex: 1;
     display: flex;
     vertical-align: middle;
 }
@@ -21,6 +22,10 @@
     width: 100%;
     border-radius: 50px;
     max-width: 500px;
+}
+
+.descricao{
+    flex: 1;
 }
 
 .descricao h2{

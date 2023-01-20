@@ -32,8 +32,9 @@ Route::prefix('/reserves')->group(function(){
 
 Route::prefix('/products')->group(function(){
     Route::get('/menu/{id}', [ProductController::class, 'list'])->name('menu');
-    Route::get('/product/{id}', [ProductController::class, 'show'])->name('product');
+    Route::get('/{id}', [ProductController::class, 'show'])->name('product');
     Route::get('/favorites', [ProductController::class, 'favorites_list'])->middleware('auth')->name('favorites');
+    Route::post('/', [ProductController::class, 'saved'])->middleware('auth')->name('saved.product');
 });
 
 Route::get('/about', [AboutController::class, 'about'])->name('about');
