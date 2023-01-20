@@ -49,14 +49,14 @@
     <!--Informações da empresa-->
     <section class="informacoes_empresa">
       <div>
-        <p><strong>Horário:</strong> {{ date("H:i", strtotime($info->open))}} ás {{ date("H:i", strtotime($info->close))}}</p>
+        <strong>Horário:</strong> {{ date("H:i", strtotime($info->open))}} ás {{ date("H:i", strtotime($info->close))}}<br>
 
-        <p><strong>Localização: </strong></p>
-        <p>{{$info->address}}</p>
+        <strong>Localização: </strong><br>
+        {{$info->address}}<br>
 
-        <p><strong>Capacidade: </strong> {{$info->capacity}} Pessoas</p>
+        <strong>Capacidade: </strong> {{$info->capacity}} Pessoas<br>
 
-        <p><strong>Mesas:</strong> {{$info->tables}}</p>
+        <strong>Mesas:</strong> {{$info->tables}}<br>
       </div>
 
       <div>
@@ -71,9 +71,9 @@
               @foreach ($reserves as $reserve)
                 <div class="box-reserva">
                   <h2>{{date("d/m/Y", strtotime($reserve->date_reservation))}} - {{date("H:i", strtotime($reserve->hour))}}</h2>
-                  <p><strong>Status:</strong> <span class="status">{{$reserve->status}}</span></p>
+                  <p><strong>Status:</strong> <span class="status">{{$status[$reserve->status]}}</span></p>
                   <p><strong>Detalhes:</strong> <span class="detalhes">{{$reserve->table}}</span> | <span class="detalhes"> {{$reserve->amount}} Pessoas</span></p>
-                  <p><strong>Nome:</strong> <span class="detalhes">{{$reserve->user_id}}</span></p>
+                  <p><strong>Nome:</strong> <span class="detalhes">{{$reserve->name}}</span></p>
                 </div>
               @endforeach
               

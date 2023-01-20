@@ -83,22 +83,33 @@ class ReservationController extends Controller
 
     public function showAdmin($id){
         
-        $reserves = Reserve::all();
+        $reserves = Reserve::join('users', 'users.id', '=', 'reserves.user_id')
+                        ->orderBy('date_reservation', 'desc')
+                        ->get();
         $hoje = date("Y-m-d");
         if ($id == 1) { 
             //Hoje
-            $reserves = Reserve::where('date_reservation', $hoje);
+            $reserves = Reserve::where('date_reservation', $hoje)
+                        ->join('users', 'users.id', '=', 'reserves.user_id')
+                        ->orderBy('date_reservation', 'desc')
+                        ->get();
         }else if ($id == 2) { 
             //Essa semana
             $sete_dias = date("Y-m-d", strtotime($hoje) + (7*24*60*60));
-            $reserves = Reserve::whereBetween('date_reservation', [$hoje, $sete_dias]);
+            $reserves = Reserve::whereBetween('date_reservation', [$hoje, $sete_dias])
+                        ->join('users', 'users.id', '=', 'reserves.user_id')
+                        ->orderBy('date_reservation', 'desc')
+                        ->get();
         }else if($id == 3){
             //Esse mês
             $mes = date("Y-m-d", strtotime($hoje) + (30*24*60*60));
-            $reserves = Reserve::whereBetween('date_reservation', [$hoje, $mes]);
+            $reserves = Reserve::whereBetween('date_reservation', [$hoje, $mes])
+                        ->join('users', 'users.id', '=', 'reserves.user_id')
+                        ->orderBy('date_reservation', 'desc')
+                        ->get();
         }
         
-
-        return view('reserves.dashboard', ['reserves' => $reserves, 'id' => $id]);
+        $status = ['A confirmar', 'Confirmada', 'Cancelada', 'Vencida'];
+        return view('reserves.dashboard', ['reserves' => $reserves, 'id' => $id, 'status' => $status]);
     }
 }
