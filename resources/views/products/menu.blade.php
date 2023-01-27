@@ -50,6 +50,7 @@
 
             </div>
             <p class="mostrar_mais"><span onclick="mostrar({{$key}})">Mostrar Mais</span></p>
+            <br>
         <hr>
     @endforeach
 @endsection

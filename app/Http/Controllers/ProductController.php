@@ -71,8 +71,24 @@ class ProductController extends Controller
     }
 
     // Favoritos
-    public function favorites_list(){
-        return view('products.favorites');
+    public function favorites_list($id){
+
+        $cats = Category::all();
+        $id_user =  auth()->user()->id;
+
+        if ($id != 'tudo') {
+            $categories = Category::where('id', $id)->get();
+            $products = Saved::where('user_id', $id_user)
+                        ->join('products', 'products.id', '=', 'saveds.product_id')
+                        ->where('products.category_id', $id)
+                        ->get();
+        }else{
+            $categories = Category::all();
+            $products = Saved::where('user_id', $id_user)
+                        ->join('products', 'products.id', '=', 'saveds.product_id')->get();
+        }
+
+        return view('products.favorites', ['products' => $products, 'categories' => $categories, 'cats' => $cats, 'id' => $id]);
     }
 
     // Menu Admin

@@ -30,7 +30,7 @@ Route::prefix('/reserves')->group(function(){
     Route::put('/cancel', [ReservationController::class, 'cancel'])->middleware('auth')->name('reserve.cancel');
 });
 
-Route::get('/products/favorites', [ProductController::class, 'favorites_list'])->middleware('auth')->name('favorites');
+Route::get('/products/favorites/{id}', [ProductController::class, 'favorites_list'])->middleware('auth')->name('favorites');
 Route::prefix('/products')->group(function(){
     Route::get('/menu/{id}', [ProductController::class, 'list'])->name('menu');
     Route::get('/{id}', [ProductController::class, 'show'])->name('product');

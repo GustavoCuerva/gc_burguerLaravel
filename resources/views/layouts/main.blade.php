@@ -43,7 +43,7 @@
                     <button><img src="{{ asset('/icons/search-svgrepo-com.svg') }}" alt=""></button>
                 </form>
                 <a><img src="{{ asset('/icons/search-svgrepo-com.svg') }}" class="lupa" alt=""></a>
-                <a href="{{ route('favorites') }}"><img src="{{ asset('/icons/favorite-svgrepo-com.svg') }}" alt=""></a>
+                <a href="{{ route('favorites', ['id' => 'tudo']) }}"><img src="{{ asset('/icons/favorite-svgrepo-com.svg') }}" alt=""></a>
                     @if (Auth::check())
                         <a onclick="mostrar_opc_usuario()"><img src="{{ asset('/icons/user-svgrepo-com.svg') }}" alt=""></a>
                             <div class="opc_usuario" style="display: none;">
