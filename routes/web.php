@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformationController;
@@ -63,6 +64,9 @@ Route::prefix('dashboard')->group(function(){
     // Reserves
     Route::get('/reserves/{id}', [ReservationController::class, 'showAdmin'])->middleware('auth')->name('reserves.admin');
 });
+
+Route::post('/assessments', [AssessmentController::class, 'store'])->middleware('auth')->name('store.assessments');
+Route::put('/assessments', [AssessmentController::class, 'update'])->middleware('auth')->name('update.assessments');
 
 Route::fallback(function(){
     return view('fallback');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assessment;
 use App\Models\Category;
+use App\Models\Information;
 use App\Models\Product;
 use App\Models\Saved;
 use Illuminate\Http\Request;
@@ -12,11 +14,38 @@ class ProductController extends Controller
 {
     public function index(){
 
-        /* Inicio dos favoritos
+        $products = Product::limit(4)->get();
+
+        //  favoritos
         $favoritos = Saved::groupBy('product_id')
-                    ->join('contacts', 'users.id', '=', 'contacts.user_id')
-                    ->orderBy(count('product_id'), 'desc');*/
-        return view('welcome');
+                    ->join('products', 'products.id', '=', 'saveds.product_id')
+                    ->selectRaw('*,count(saveds.product_id) AS `count`')
+                    ->orderBy('count', 'desc')
+                    ->limit(4)
+                    ->get();
+
+        // Melhores preços
+        $baratos = Product::orderBy('value')->limit(4)->get();
+
+        // Informações
+        $info = Information::findOrFail(1);
+
+        // News
+        $news = Product::orderBy('created_at')->limit(2)->get();
+
+        // Avaliações
+        $assessments = Assessment::join('users', 'users.id', '=', 'assessments.user_id')->get();
+        $my_assessment = Assessment::where('user_id', auth()->user()->id)->limit(1)->get();
+
+        return view('welcome', [
+            'favoritos'     => $favoritos, 
+            'products'      => $products,
+            'baratos'       => $baratos,
+            'info'          => $info,
+            'news'          => $news,
+            'assessments'   => $assessments,
+            'my_assessment' => $my_assessment,
+        ]);
     }
 
     // Menu de lanches

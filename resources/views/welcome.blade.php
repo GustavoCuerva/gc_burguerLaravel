@@ -21,60 +21,42 @@
         <section class="destaque populares">
             <h2>Nosso lanches favoritos</h2>
             <div class="produtos_populares produtos">
-                <div class="produto produto_popular">
-                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
-                    <h3>Peça 1 Coma 2</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
-
-                <div class="produto produto_popular">
-                    <img src="{{ asset('/img/produtos/combo.jpg') }}" alt="">
-                    <h3>Combo Hambuguer + Batata + Refri</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
-
-                <div class="produto produto_popular">
-                    <img src="{{ asset('/img/produtos/combo2.jpg') }}" alt="">
-                    <h3>Combo Hambuguer + Batata + Refri</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
-
-                <div class="produto produto_popular">
-                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
-                    <h3>Peça 1 Coma 2</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
+                @forelse ($favoritos as $product)
+                <a href="{{ route('product', ['id' => $product->id]) }}">
+                    <div class="produto produto_menu ">
+                        <img src="{{asset($product->path_image)}}" alt="">
+                        <h3>{{$product->name}}</h3>
+                        <p class="preco">R$ {{$product->value}}</p>
+                    </div>
+                </a>
+                @empty
+                    @foreach ($products as $product)
+                    <a href="{{ route('product', ['id' => $product->id]) }}">
+                        <div class="produto produto_menu ">
+                            <img src="{{asset($product->path_image)}}" alt="">
+                            <h3>{{$product->name}}</h3>
+                            <p class="preco">R$ {{$product->value}}</p>
+                        </div>
+                    </a>
+                    @endforeach
+                @endforelse
             </div>
         </section><!--Itens mais populares-->
 
         <hr>
 
         <section class="destaque promoções">
-            <h2>Aproveite nossas promoções</h2>
+            <h2>Melhores preços</h2>
             <div class="produtos_populares produtos">
-                <div class="produto produto_promocao">
-                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
-                    <h3>Peça 1 Coma 2</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
-
-                <div class="produto produto_promocao">
-                    <img src="{{ asset('/img/produtos/combo.jpg') }}" alt="">
-                    <h3>Combo Hambuguer + Batata + Refri</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
-
-                <div class="produto produto_promocao">
-                    <img src="{{ asset('/img/produtos/combo2.jpg') }}" alt="">
-                    <h3>Combo Hambuguer + Batata + Refri</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
-
-                <div class="produto produto_promocao">
-                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
-                    <h3>Peça 1 Coma 2</h3>
-                    <p class="preco promocao-preco">R$ 30,58</p>
-                </div>
+            @foreach ($baratos as $product)
+                <a href="{{ route('product', ['id' => $product->id]) }}">
+                    <div class="produto produto_menu ">
+                        <img src="{{asset($product->path_image)}}" alt="">
+                        <h3>{{$product->name}}</h3>
+                        <p class="preco">R$ {{$product->value}}</p>
+                    </div>
+                </a>
+            @endforeach
             </div>
         </section><!--Itens Em promoção-->
 
@@ -82,7 +64,7 @@
             <div>
                 <h2>Faça sua reserva</h2>
                 <p>Terça a Domingo</p>
-                <p>18:00 ás 00:00</p>
+                <p>{{date('H:i', strtotime($info->open))}} ás {{date('H:i', strtotime($info->close))}}</p>
             </div>
             <a href="{{ route('reserve') }}">RESERVAR</a>
         </section><!--Baner do meio Reserva-->
@@ -90,16 +72,15 @@
         <section class="novidades destaque">
             <h2>Novidades</h2>
             <div class="produtos_novos produtos">
-                <div class="produto produto_novo">
-                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
-                    <h3>Peça 1 Coma 2</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
-                <div class="produto produto_novo">
-                    <img src="{{ asset('/img/produtos/2hambuguer.jpg') }}" alt="">
-                    <h3>Peça 1 Coma 2</h3>
-                    <p class="preco">R$ 30,58</p>
-                </div>
+                @foreach ($news as $product)
+                <a href="{{ route('product', ['id' => $product->id]) }}">
+                    <div class="produto produto_novo ">
+                        <img src="{{asset($product->path_image)}}" alt="">
+                        <h3>{{$product->name}}</h3>
+                        <p class="preco">R$ {{$product->value}}</p>
+                    </div>
+                </a>
+                @endforeach
             </div>
         </section><!--Novidades-->
 
@@ -110,66 +91,32 @@
             <div style="max-width: 1200px;" class="swiper mySwiper container depoimentos lista-avaliacoes">
                 <div class="swiper-wrapper content">
 
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                        <!-- ESTRLAS -->
-                        <div class="estrelas" style="cursor: default; display:flex; justify-content: center;">
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                        </div>
-                        <p class="username"><strong>User 1</strong></p>
-                        <p class="comentario">O hambúrguer é bom, a batata poderia ser mais crocante. Tempo de espera é de aproximadamente 15 minutos. Não verifiquei se existe estacionamento, mas na rua tem bastante espaço para parar o carro.</p>
-                        </div>
-                    </div>
+                    @forelse ($assessments as $assessment)
 
                     <div class="swiper-slide card">
                         <div class="card-content">
                         <!-- ESTRLAS -->
                         <div class="estrelas" style="cursor: default; display:flex; justify-content: center;">
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                        </div>
-                        <p class="username"><strong>User 1</strong></p>
-                        <p class="comentario">O hambúrguer é bom, a batata poderia ser mais crocante. Tempo de espera é de aproximadamente 15 minutos. Não verifiquei se existe estacionamento, mas na rua tem bastante espaço para parar o carro.</p>
-                        </div>
-                    </div>
+                            @for ($i = 1; $i <= 5; $i++)
 
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                        <!-- ESTRLAS -->
-                        <div class="estrelas" style="cursor: default; display:flex; justify-content: center;">
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                        </div>
-                        <p class="username"><strong>User 1</strong></p>
-                        <p class="comentario">O hambúrguer é bom, a batata poderia ser mais crocante. Tempo de espera é de aproximadamente 15 minutos. Não verifiquei se existe estacionamento, mas na rua tem bastante espaço para parar o carro.</p>
-                        </div>
-                    </div>
+                                @if ($i<= $assessment->note)
+                                    <label><i class="fa" style="cursor: default; color: #FC0;"></i></label>
+                                @else
+                                    <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
+                                @endif
 
-                    <div class="swiper-slide card">
-                        <div class="card-content">
-                        <!-- ESTRLAS -->
-                        <div class="estrelas" style="cursor: default; display:flex; justify-content: center;">
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
-                            <label><i class="fa" style="cursor: default; color: #ccc;"></i></label>
+                                
+                            @endfor
                         </div>
-                        <p class="username"><strong>User 1</strong></p>
-                        <p class="comentario">O hambúrguer é bom, a batata poderia ser mais crocante. Tempo de espera é de aproximadamente 15 minutos. Não verifiquei se existe estacionamento, mas na rua tem bastante espaço para parar o carro.</p>
+                        <p class="username"><strong>{{$assessment->name}}</strong></p>
+                        <p class="comentario">{{$assessment->comment}}</p>
                         </div>
                     </div>
+                    @empty
+                    <div class="alert alert-light" role="alert">
+                        Sem avaliações no momento
                     </div>
+                    @endforelse
             </div><!--Avaliações-->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -179,31 +126,47 @@
 
         <section class="avaliar destaque">
             <h2>Envie-nos sua opnião</h2>
-            <form action="#" method="post">
 
+            {{-- Já existe uma avaliação --}}
+            @php
+                $check_av = array("","", "", "", "", "");
+                $rota = route('store.assessments');
+                $comment = "";
+
+                if ($my_assessment->count() > 0){
+                    $check_av[$my_assessment[0]->note] = "checked";
+                    $rota = route('update.assessments');
+                    $comment = $my_assessment[0]->comment;
+                }
+            @endphp
+            
+            
+
+            <form action="{{$rota}}" method="post">
+                @csrf
+
+                @if ($my_assessment->count() > 0)
+                    @method('PUT')
+                @endif
+
+                @if (session('msg'))
+                <div class="container">
+                    <div class="alert alert-{{session('class')}}" role="alert">
+                        {{ session('msg') }}
+                    </div>
+                </div>
+                @endif
                 <div class="estrelas">
                     <input type="radio" id="vazio" name="estrela" value="" checked>
-
-                        <label for="estrela_um"><i class="fa check"></i></label>
-                        <input type="radio" id="estrela_um" name="estrela" value="1">
-                        
-                        <label for="estrela_2"><i class="fa check"></i></label>
-                        <input type="radio" id="estrela_2" name="estrela" value="2">
-
-                        <label for="estrela_3"><i class="fa check"></i></label>
-                        <input type="radio" id="estrela_3" name="estrela" value="3">
-
-                        <label for="estrela_4"><i class="fa check"></i></label>
-                        <input type="radio" id="estrela_4" name="estrela" value="4">
-
-                        <label for="estrela_5"><i class="fa check"></i></label>
-                        <input type="radio" id="estrela_5" name="estrela" value="5">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <label for="estrela_{{$i}}"><i class="fa check"></i></label>
+                            <input type="radio" id="estrela_{{$i}}" name="estrela" value="{{$i}}" {{$check_av[$i]}}>
+                        @endfor
                     <br><br>
-                    
                 </div><!-- ESTRELAS -->
                 
-                <textarea name="comentario" id="comentario" placeholder="Digite aqui seu comentário..."></textarea>
-                <input type="button" value="ENVIAR" class="enviar">
+                <textarea name="comentario" id="comentario" placeholder="Digite aqui seu comentário...">{{$comment}}</textarea>
+                <input type="submit" value="ENVIAR" class="enviar">
             </form>
         </section><!--Avaliar-->
 
