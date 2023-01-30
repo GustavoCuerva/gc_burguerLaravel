@@ -25,8 +25,7 @@
     <h2 style="text-align: center; font-size: 30px; color: #787878; font-weight: 900;">MEUS FAVORITOS</h2>
 
     <section class="destaque destaque_menu">
-        @foreach ($categories as $category)
-            @php $count = 0; @endphp
+        @forelse ($categories as $category)
             <h2>{{$category->category}}</h2>
             
             <div class="produtos produtos_menu">
@@ -38,20 +37,20 @@
                                 <h3>{{$product->name}}</h3>
                                 <p class="preco">R$ {{$product->value}}</p>
                             </div>
-                        </a>
-                        @php $count = 1; @endphp    
+                        </a>   
                     @endif
-                @endforeach    
-                @if ($count == 0)
-                <div class="alert alert-light" role="alert">
-                    Sem produtos salvos nessa categoria
-                </div>
-                @endif
+                @endforeach
             </div>
             <p class="mostrar_mais"><span onclick="mostrar({{$loop->index}})">Mostrar Mais</span></p>
             <br>
             <hr>
-        @endforeach
+        @empty
+            <div style="margin: 10px 50px; text-align: center; display: flex; height: 50vh; flex-direction: column; justify-content: center;">
+                <div class="alert alert-secondary container" role="alert" style="font-size: 20px;">
+                    Produtos não encontrados
+                </div>
+            </div>
+        @endforelse
     </section>
     
 @endsection

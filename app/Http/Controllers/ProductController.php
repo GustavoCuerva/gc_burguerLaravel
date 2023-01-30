@@ -57,19 +57,33 @@ class ProductController extends Controller
     // Menu de lanches
     public function list($id){
         $search = request('search');
-        $cats = Category::all();
+
+        // Buscando categorias com produtos cadastrados
+        $cats = Product::groupBy('category_id')
+                ->join('categories', 'categories.id', '=', 'products.category_id')
+                ->orderBy('category_id')->get();
 
         if ($id != 'tudo') {
             $categories = Category::where('id', $id)->get();
             $products = Product::where('category_id', $id)->get();
         }else{
-            $categories = Category::all();
+            // Buscando categorias com produtos cadastrados
+            $categories = Product::groupBy('category_id')
+                        ->join('categories', 'categories.id', '=', 'products.category_id')
+                        ->orderBy('category_id')->get();
             $products = Product::all();
         }
 
         if ($search) {
             $products = Product::where('name', 'like', "%$search%")
-                        ->orWhere('description', 'like', "%$search%")->get();
+                        ->orWhere('description', 'like', "%$search%");
+
+            // Buscando categorias com produtos cadastrados
+            $categories = $products->groupBy('category_id')
+                        ->join('categories', 'categories.id', '=', 'products.category_id')
+                        ->orderBy('category_id')->get();
+
+            $products = $products->get();
         }
 
         return view('products.menu', ['cats' => $cats, 'categories' => $categories, 'products' => $products, 'id' => $id, 'search' => $search]);
@@ -115,19 +129,36 @@ class ProductController extends Controller
     // Favoritos
     public function favorites_list($id){
 
-        $cats = Category::all();
         $id_user =  auth()->user()->id;
+
+        /* Getting all the categories that the user has saved. */
+        $cats = Saved::where('user_id', $id_user)
+                        ->join('products', 'products.id', '=', 'saveds.product_id')
+                        ->groupBy('category_id')
+                        ->join('categories', 'categories.id', '=', 'products.category_id')
+                        ->orderBy('category_id')->get();
 
         if ($id != 'tudo') {
             $categories = Category::where('id', $id)->get();
             $products = Saved::where('user_id', $id_user)
                         ->join('products', 'products.id', '=', 'saveds.product_id')
-                        ->where('products.category_id', $id)
-                        ->get();
+                        ->where('products.category_id', $id);
+            /* Getting all the categories that the user has saved. */
+            $categories = $products->groupBy('category_id')
+                        ->join('categories', 'categories.id', '=', 'products.category_id')
+                        ->orderBy('category_id')->get();
+            $products = $products->get();
         }else{
-            $categories = Category::all();
+            //$categories = Category::all();
             $products = Saved::where('user_id', $id_user)
-                        ->join('products', 'products.id', '=', 'saveds.product_id')->get();
+                        ->join('products', 'products.id', '=', 'saveds.product_id');
+
+            /* Getting all the categories that the user has saved. */
+            $categories = $products->groupBy('category_id')
+                            ->join('categories', 'categories.id', '=', 'products.category_id')
+                            ->orderBy('category_id')->get();
+            
+            $products = $products->get();
         }
 
         return view('products.favorites', ['products' => $products, 'categories' => $categories, 'cats' => $cats, 'id' => $id]);

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-
+<div style="min-height: 70vh;">
 <form action="#" method="post" class="filtro">
     <select name="filtro" id="filtro" onchange="filtro_categorias()">
         <option value="tudo">Tudo</option>
@@ -23,12 +23,11 @@
     </select>
 </form>
 
-    @foreach ($categories as $key => $category)
+    @forelse ($categories as $key => $category)
         <section class="destaque destaque_menu">
             <h2>{{$category->category}}</h2>
             
             <div class="produtos produtos_menu ">
-            @php $cont=0; @endphp
             @foreach ($products as $product)
                 @if ($product->category_id == $category->id)
                     <a href="{{ route('product', ['id' => $product->id]) }}">
@@ -38,19 +37,18 @@
                             <p class="preco">R$ {{$product->value}}</p>
                         </div>
                     </a>
-                    @php $cont=1; @endphp
                 @endif
             @endforeach
-            
-            @if ($cont == 0)
-            <div class="alert alert-light" role="alert">
-                Sem produtos cadastrados na cartegoria
-            </div>
-            @endif
-
             </div>
             <p class="mostrar_mais"><span onclick="mostrar({{$key}})">Mostrar Mais</span></p>
             <br>
         <hr>
-    @endforeach
+    @empty
+        <div style="margin: 10px 50px; text-align: center; display: flex; height: 50vh; flex-direction: column; justify-content: center;">
+            <div class="alert alert-secondary container" role="alert" style="font-size: 20px;">
+                Produto não encontrado
+            </div>
+        </div>
+    @endforelse
+</div>
 @endsection
