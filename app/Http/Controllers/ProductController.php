@@ -122,6 +122,11 @@ class ProductController extends Controller
 
     // Menu Admin
     public function listProducts($id){
+        
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         $categories = Category::all();
         
@@ -136,6 +141,11 @@ class ProductController extends Controller
 
     // Formulario de criacao do produto
     public function create($id){
+        
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         $categories = Category::all();
 
@@ -144,6 +154,11 @@ class ProductController extends Controller
 
     // Salvar o produto no banco
     public function store(Request $resquest){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         // Verificando se já existe
         $product_ver = Product::where('name', $resquest->name);
@@ -189,6 +204,11 @@ class ProductController extends Controller
     // Edição do produto
     public function edit($id){
 
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
+
         $product = Product::findOrFail($id);
         $categories = Category::all();
 
@@ -197,6 +217,11 @@ class ProductController extends Controller
 
     // Update para o banco
     public function update(Request $request){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         $product_ver = Product::where('name', $request->name)->where('id', '!=', $request->id);
 
@@ -247,6 +272,11 @@ class ProductController extends Controller
 
     // Excluir produto
     public function destroy(Request $request){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         $id = $request->id;
 

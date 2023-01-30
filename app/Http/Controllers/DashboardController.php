@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
+
         /* It's updating the status of the reserves that are in the past to 3, which means that the
         reserve is expired. */
         // Comando altomatico programado, retirar esse trecho ao colocar no servidor e configurar.

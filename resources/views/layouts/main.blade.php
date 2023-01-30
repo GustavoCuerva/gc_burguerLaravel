@@ -47,8 +47,13 @@
                     @if (Auth::check())
                         <a onclick="mostrar_opc_usuario()"><img src="{{ asset('/icons/user-svgrepo-com.svg') }}" alt=""></a>
                             <div class="opc_usuario" style="display: none;">
-                                <a href="{{ route('dashboard') }}">Painel admin</a>
-                                <a href="{{--route('my-data')--}}">Meus dados</a>
+                                @if (auth()->user()->permission == 1)
+                                {{-- Admin --}}
+                                    <a href="{{ route('dashboard') }}">Painel admin</a>
+                                @else
+                                    <a href="{{--route('my-data')--}}">Meus dados</a>
+                                @endif
+                                
                                 <form action="/logout" method="post">
                                     @csrf
                                     <a href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>

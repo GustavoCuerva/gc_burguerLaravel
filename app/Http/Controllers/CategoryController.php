@@ -10,6 +10,11 @@ class CategoryController extends Controller
 {
     public function create(){
 
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
+
         $categories = Category::all();
         return view('category.create', ['categories' => $categories]);
     }
@@ -17,6 +22,11 @@ class CategoryController extends Controller
 
 
     public function show_edit($id){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         $categories = Category::all();
 
@@ -28,6 +38,11 @@ class CategoryController extends Controller
 
 
     public function store(Request $request){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         $category = new Category;
         
@@ -65,6 +80,11 @@ class CategoryController extends Controller
 
 
     public function update(Request $request){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         $category = Category::findOrFail($request->id);
 
@@ -109,6 +129,12 @@ class CategoryController extends Controller
     }
 
     public function destroy(Request $request){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
+        
         $id = $request->id;
 
         $category = Category::findOrFail($id);

@@ -10,6 +10,11 @@ class InformationController extends Controller
 {
     public function edit(){
 
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
+
         $information = Information::findOrFail(1);
 
         if ($information->count() == 0) {
@@ -30,6 +35,11 @@ class InformationController extends Controller
     }
 
     public function update(Request $request){
+
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
 
         Information::findOrFail(1)->update([
             "open"     => $request->open,

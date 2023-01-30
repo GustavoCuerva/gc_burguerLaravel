@@ -167,6 +167,11 @@ class ReservationController extends Controller
     // Listar reservas no painel admin
     public function showAdmin($id){
         
+        if (auth()->user()->permission != 1) {
+            // Usuario
+            return back();
+        }
+
         /* It's updating the status of the reserves that are in the past to 3, which means that the
         reserve is expired. */
         // Comando altomatico programado, retirar esse trecho ao colocar no servidor e configurar.
