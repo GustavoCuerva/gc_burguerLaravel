@@ -51,4 +51,8 @@ class InformationController extends Controller
 
         return redirect('/dashboard')->with('msg', 'Dados da empresa alterados com sucesso')->with('class', 'success');
     }
+
+    public function about(){
+        return view('about.about');
+    }
 }

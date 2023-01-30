@@ -39,7 +39,7 @@ Route::prefix('/products')->group(function(){
     Route::post('/', [ProductController::class, 'saved'])->middleware('auth')->name('saved.product');
 });
 
-Route::get('/about', [AboutController::class, 'about'])->name('about');
+Route::get('/about', [InformationController::class, 'about'])->name('about');
 
 Route::prefix('dashboard')->group(function(){
     
