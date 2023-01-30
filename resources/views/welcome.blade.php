@@ -124,7 +124,7 @@
             </section>
         </section><!--Avaliações-->
 
-        <section class="avaliar destaque">
+        <section class="avaliar destaque" id="avaliacao">
             <h2>Envie-nos sua opnião</h2>
 
             {{-- Já existe uma avaliação --}}
