@@ -17,6 +17,11 @@ class UpdateUserPassword implements UpdatesUserPasswords
      * @param  array  $input
      * @return void
      */
+
+    public function index(){
+        return view('profile.update-password-form');
+    }
+
     public function update($user, array $input)
     {
         Validator::make($input, [

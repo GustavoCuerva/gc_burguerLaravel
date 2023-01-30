@@ -8,6 +8,7 @@ use App\Models\Information;
 use App\Models\Product;
 use App\Models\Saved;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\Catch_;
 
 class ProductController extends Controller
@@ -35,7 +36,12 @@ class ProductController extends Controller
 
         // Avaliações
         $assessments = Assessment::join('users', 'users.id', '=', 'assessments.user_id')->get();
-        $my_assessment = Assessment::where('user_id', auth()->user()->id)->limit(1)->get();
+        if (Auth::check()) {
+            $my_assessment = Assessment::where('user_id', auth()->user()->id)->limit(1)->get();
+        }else{
+            $my_assessment = Assessment::where('user_id', null)->limit(1)->get();;
+        }
+        
 
         return view('welcome', [
             'favoritos'     => $favoritos, 
@@ -125,7 +131,7 @@ class ProductController extends Controller
         
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $categories = Category::all();
@@ -144,7 +150,7 @@ class ProductController extends Controller
         
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $categories = Category::all();
@@ -157,7 +163,7 @@ class ProductController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         // Verificando se já existe
@@ -206,7 +212,7 @@ class ProductController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $product = Product::findOrFail($id);
@@ -220,7 +226,7 @@ class ProductController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $product_ver = Product::where('name', $request->name)->where('id', '!=', $request->id);
@@ -275,7 +281,7 @@ class ProductController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $id = $request->id;

@@ -12,7 +12,7 @@ class InformationController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $information = Information::findOrFail(1);
@@ -38,7 +38,7 @@ class InformationController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         Information::findOrFail(1)->update([

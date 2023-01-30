@@ -169,7 +169,7 @@ class ReservationController extends Controller
         
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         /* It's updating the status of the reserves that are in the past to 3, which means that the

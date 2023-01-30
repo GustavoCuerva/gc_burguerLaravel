@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Fortify\UpdateUserPassword;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\AboutController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -67,6 +68,12 @@ Route::prefix('dashboard')->group(function(){
 
 Route::post('/assessments', [AssessmentController::class, 'store'])->middleware('auth')->name('store.assessments');
 Route::put('/assessments', [AssessmentController::class, 'update'])->middleware('auth')->name('update.assessments');
+
+Route::get('/my-data', [UserController::class, 'index'])->middleware('auth')->name('my-data');
+Route::put('/my-data', [UserController::class, 'update'])->middleware('auth')->name('my-data.update');
+Route::delete('/my-data', [UserController::class, 'destroy'])->middleware('auth')->name('delete.user');
+
+Route::get('/end', [UserController::class, 'close'])->middleware('auth');
 
 Route::fallback(function(){
     return view('fallback');

@@ -12,7 +12,7 @@ class CategoryController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $categories = Category::all();
@@ -25,7 +25,7 @@ class CategoryController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $categories = Category::all();
@@ -41,7 +41,7 @@ class CategoryController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $category = new Category;
@@ -83,7 +83,7 @@ class CategoryController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
 
         $category = Category::findOrFail($request->id);
@@ -132,7 +132,7 @@ class CategoryController extends Controller
 
         if (auth()->user()->permission != 1) {
             // Usuario
-            return back();
+            return redirect('/');
         }
         
         $id = $request->id;

@@ -51,10 +51,10 @@
                                 {{-- Admin --}}
                                     <a href="{{ route('dashboard') }}">Painel admin</a>
                                 @else
-                                    <a href="{{--route('my-data')--}}">Meus dados</a>
+                                    <a href="{{ route('my-data') }}">Meus dados</a>
                                 @endif
                                 
-                                <form action="/logout" method="post">
+                                <form action="/logout" method="post" style="margin: 10px;">
                                     @csrf
                                     <a href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
                                 </form>
