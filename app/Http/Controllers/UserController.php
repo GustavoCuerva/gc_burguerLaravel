@@ -12,8 +12,7 @@ class UserController extends Controller
     public function index(){
 
         $user = User::findOrFail(auth()->user()->id);
-        // $senha = Route::has('12345678');
-        return view('my-data', ['user' => $user, 'senha' => '$senha']);
+        return view('my-data', ['user' => $user]);
     }
 
     public function update(Request $request){

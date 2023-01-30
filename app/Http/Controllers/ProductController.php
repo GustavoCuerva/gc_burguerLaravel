@@ -56,7 +56,9 @@ class ProductController extends Controller
 
     // Menu de lanches
     public function list($id){
+        $search = request('search');
         $cats = Category::all();
+
         if ($id != 'tudo') {
             $categories = Category::where('id', $id)->get();
             $products = Product::where('category_id', $id)->get();
@@ -65,7 +67,12 @@ class ProductController extends Controller
             $products = Product::all();
         }
 
-        return view('products.menu', ['cats' => $cats, 'categories' => $categories, 'products' => $products, 'id' => $id]);
+        if ($search) {
+            $products = Product::where('name', 'like', "%$search%")
+                        ->orWhere('description', 'like', "%$search%")->get();
+        }
+
+        return view('products.menu', ['cats' => $cats, 'categories' => $categories, 'products' => $products, 'id' => $id, 'search' => $search]);
     }
 
     // Produto individual

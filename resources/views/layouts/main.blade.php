@@ -1,3 +1,8 @@
+@php
+    if(!isset($search)){
+        $search = "";
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -38,8 +43,8 @@
             </div>
 
             <div class="menu-usuario">
-                <form action="pesquisa.php" method="post" class="pesquisar">
-                    <input type="search" placeholder="Pesquisar" name="pesquisa">
+                <form action="{{route('menu', ['id' => 'tudo'])}}" method="get" class="pesquisar">
+                    <input type="search" placeholder="Pesquisar" name="search" value="{{$search}}" style="border: none;">
                     <button><img src="{{ asset('/icons/search-svgrepo-com.svg') }}" alt=""></button>
                 </form>
                 <a><img src="{{ asset('/icons/search-svgrepo-com.svg') }}" class="lupa" alt=""></a>
