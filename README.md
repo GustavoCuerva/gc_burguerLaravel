@@ -40,7 +40,7 @@ Clique no link seguindo a instrução e caso ocorra algum erro como pedindo uma 
 
 ### Configurando o email
 
-No arquivo .env configure um email smtp, onde foi utilizado para teste no localhost o mailtrap, crie uma conta e insira suas credenciais
+No arquivo .env configure um email smtp, onde foi utilizado para teste no localhost o mailtrap, crie uma conta e coloque suas credenciais.
 
 ### Primeira utilização
 Rode o comando `php artisan serve` em seu terminal. O projeto abrirá localmente.
