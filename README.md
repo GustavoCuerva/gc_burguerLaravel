@@ -38,6 +38,10 @@ Após terminar essa intalação rode `npm run dev`
 
 Clique no link seguindo a instrução e caso ocorra algum erro como pedindo uma chave apenas clique em gerar chave.
 
+### Configurando o email
+
+No arquivo .env configure um email smtp, onde foi utilizado para teste no localhost o mailtrap, crie uma conta e insira suas credenciais
+
 ### Primeira utilização
 Rode o comando `php artisan serve` em seu terminal. O projeto abrirá localmente.
 

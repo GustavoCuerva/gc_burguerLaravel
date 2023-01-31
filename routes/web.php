@@ -21,6 +21,7 @@ use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\MailController;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
@@ -74,6 +75,8 @@ Route::put('/my-data', [UserController::class, 'update'])->middleware('auth')->n
 Route::delete('/my-data', [UserController::class, 'destroy'])->middleware('auth')->name('delete.user');
 
 Route::get('/end', [UserController::class, 'close'])->middleware('auth');
+
+Route::get('/send-mail', [MailController::class, 'sendMail'])->name('send.mail');
 
 Route::fallback(function(){
     return view('fallback');
