@@ -80,7 +80,7 @@ Route::get('/end', [UserController::class, 'close'])->middleware('auth')->middle
 
 // Envio de email
 Route::prefix('/send-mail')->group(function(){
-    Route::get('/reserve/{id}', [MailController::class, 'mailReserve'])->middleware('auth')->middleware('verified')->name('send.mail.reserve');
+    Route::get('/reserve/{id}', [MailController::class, 'mailDataReserve'])->middleware('auth')->middleware('verified')->name('send.mail.reserve');
     Route::get('/confirm', [MailController::class, 'mailConfirmReserve'])->middleware('auth')->middleware('verified')->name('send.mail.confirm');
 });
 

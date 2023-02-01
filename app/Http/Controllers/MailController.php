@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\OrderShipped;
 use App\Mail\ReserveConfirm;
+use App\Mail\ReserveData;
+use App\Models\Information;
 use App\Models\Reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,4 +37,17 @@ class MailController extends Controller
 
         return redirect(route('reserve'))->with('msg', 'Reserva efetuada com sucesso, apenas a confirme em suas reservas ou em seu email')->with('class', 'success');
    }
+
+   public function mailDataReserve($id){
+        
+    $reserve = Reserve::findOrFail($id);
+    $info    = Information::findOrFail(1);
+
+    $user = auth()->user()->name;
+    $email = auth()->user()->email;
+    Mail::to($email)->send(new ReserveData($user, $reserve, $info));
+
+
+    return redirect(route('reserves'))->with('msg', 'Seus os dados da reserva foram enviados ao seu email')->with('class', 'success');
+}
 }
