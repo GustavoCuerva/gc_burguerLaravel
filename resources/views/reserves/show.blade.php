@@ -21,8 +21,8 @@
         </div>
     </section><!--Filtrar-->
     @if (session('msg'))
-        <div class="container">
-            <div class="alert alert-{{session('class')}}" role="alert">
+        <div class="container" style="display: flex; justify-content: center;">
+            <div class="alert alert-{{session('class')}}" style="width: 90%;" role="alert">
                 {{ session('msg') }}
             </div>
         </div>
@@ -42,18 +42,24 @@
 
                 <div class="btns">
                     @if ($reserve->status != 1)
+                    {{-- Ah confirmar --}}
                     <form action="{{route('reserve.confirm')}}" method="post">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name='id' value="{{$reserve->id}}">
                         <button style="background-color: rgba(2, 2, 203, 0.685);">Confirmar</button>
                     </form>
+                    @else
+                    {{-- Enviar informações por email --}}
+                    <div style="margin-bottom: 16px;">
+                        <a class="linkInfo" href="{{route('send.mail.reserve', ['id' => $reserve->id])}}" style="background-color: rgba(2, 2, 203, 0.685); text-decoration: none;">Enviar dados por email</a>
+                    </div>
                     @endif
                     <form action="{{route('reserve.cancel')}}" method="post">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name='id' value="{{$reserve->id}}">
-                    <button style="background-color: rgba(209, 7, 7, 0.836);">Cancelar</button>
+                        <button style="background-color: rgba(209, 7, 7, 0.836);">Cancelar</button>
                     </form>
                 </div>
             </div>

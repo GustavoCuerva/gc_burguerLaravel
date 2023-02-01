@@ -112,7 +112,7 @@ class ReservationController extends Controller
 
             $reserve->save();
 
-            return redirect(route('reserve'))->with('msg', 'Reserva efetuada com sucesso, apenas a confirme em suas reservas')->with('class', 'success');
+            return redirect(route('send.mail.confirm'));
 
         }
 
@@ -144,6 +144,34 @@ class ReservationController extends Controller
         ]);
 
         return back()->with('msg', 'Reserva confirmada')->with('class', 'success');
+    }
+
+    // Confirmar Reserva
+    public function emailConfirm($id){
+
+        $reserve = Reserve::findOrFail($id);
+
+        if ($reserve->user_id != auth()->user()->id) {
+            // Usuario não é dono da reserva
+            return back();
+        }
+
+        // Buscando mesa disponivel
+        $tables = Reserve::where('status', 1)->where('date_reservation', $reserve->date_reservation)->get();
+        $mesa = 1;
+
+        foreach ($tables as $key => $value) {
+            if (intval($value->table) == $mesa) {
+                $mesa++;
+            }
+        }
+
+        $reserve->update([
+            'status' => 1,
+            'table' => $mesa
+        ]);
+
+        return redirect(route('reserves'))->with('msg', 'Reserva confirmada')->with('class', 'success');
     }
 
     // Cancelar Reserva

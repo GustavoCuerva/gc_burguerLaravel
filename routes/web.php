@@ -25,9 +25,11 @@ use App\Http\Controllers\MailController;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
+// Reserves
 Route::prefix('/reserves')->group(function(){
     Route::get('/', [ReservationController::class, 'create'])->name('reserve');
     Route::get('/reserves', [ReservationController::class, 'show'])->middleware('auth')->middleware('verified')->name('reserves');
+    Route::get('/confirm/{id}', [ReservationController::class, 'emailConfirm'])->middleware('auth')->middleware('verified')->name('reserve.confirmMail');
     Route::post('/reserve', [ReservationController::class, 'store'])->middleware('auth')->middleware('verified')->name('reserve.store');
     Route::put('/confirm', [ReservationController::class, 'confirm'])->middleware('auth')->middleware('verified')->name('reserve.confirm');
     Route::put('/cancel', [ReservationController::class, 'cancel'])->middleware('auth')->middleware('verified')->name('reserve.cancel');
@@ -77,7 +79,14 @@ Route::delete('/my-data', [UserController::class, 'destroy'])->middleware('auth'
 Route::get('/end', [UserController::class, 'close'])->middleware('auth')->middleware('verified');
 
 // Envio de email
-Route::get('/send-mail', [MailController::class, 'sendMail'])->name('send.mail');
+Route::prefix('/send-mail')->group(function(){
+    Route::get('/reserve/{id}', [MailController::class, 'mailReserve'])->middleware('auth')->middleware('verified')->name('send.mail.reserve');
+    Route::get('/confirm', [MailController::class, 'mailConfirmReserve'])->middleware('auth')->middleware('verified')->name('send.mail.confirm');
+});
+
+Route::get('/teste', function (){
+    return view('emails.reserves.confirm');
+});
 
 Route::fallback(function(){
     return view('fallback');
