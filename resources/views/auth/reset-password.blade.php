@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
 <style>
     .bg-gray-100{
         background-image: url("../img/template_hamburguer3.png");
@@ -11,7 +13,15 @@
             <img name="logo" src="{{asset('/img/Logo2.png')}}" style="height: 100px;">
         </x-slot>
 
-        <x-jet-validation-errors class="mb-4" />
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
