@@ -12,12 +12,22 @@
     <section class="login">
         <h2>Login</h2>
 
-        <x-jet-validation-errors class="mb-4" />
-
+        {{-- Sucesso --}}
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
+            <div class="mb-4 font-medium text-sm text-green-600 alert alert-success">
                 {{ session('status') }}
             </div>
+        @endif
+
+        {{-- Erros --}}
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
         
         <form method="POST" action="{{ route('login') }}">

@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         ResetPassword::toMailUsing(function($notifiable, $url){
 
             $count = config('auth.passwords.'.config('auth.defaults.passwords').'.expire');
-
+            $url   = route('password.reset', ['token' => $url]);
             return (new MailMessage)
             ->subject('Notificação de reset de senha')
             ->line('Recebemos um pedido de reset de senha para sua conta')
