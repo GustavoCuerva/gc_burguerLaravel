@@ -159,3 +159,68 @@ function alerta_avaliacao() {
     excluir.style.display = 'none';  
   }
 }
+
+// Carrocel
+var sliders = document.querySelectorAll(".carouselBox")
+var scrollAmount = [];
+var scrollPerClick;
+
+
+sliders.forEach((element, i) => {
+  scrollAmount[i] = 0;
+  tamanho = 0;
+
+  // Verifica se existe botão
+  arr = element.children;
+
+  for (let j = 0; j < arr.length; j++) {
+    const produto = arr[j];
+    tamanho += produto.clientWidth;
+  }
+
+  if (tamanho <= element.clientWidth) {
+    /* Hiding the left and right buttons. */
+    document.querySelectorAll(".switchLeft")[i].style.display = "none";
+    document.querySelectorAll(".switchRight")[i].style.display = "none";
+    
+    element.style.justifyContent = "center";
+  }
+});
+
+
+function sliderScroollLeft(id){
+  document.querySelectorAll(".switchRight")[id].style.display = "";
+    sliders[id].scrollTo({
+        top: 0,
+        left: (scrollAmount[id] -= scrollPerClick),
+        behavior: "smooth"
+    });
+
+    if (scrollAmount[id] < 0) {
+        scrollAmount[id] = 0;
+    }
+
+    if (scrollAmount[id] == 0) {
+      document.querySelectorAll(".switchLeft")[id].style.display = "none";
+    }
+}
+
+function sliderScroollRight(id){
+
+    document.querySelectorAll(".switchLeft")[id].style.display = "";
+
+    if (scrollAmount[id] <= sliders[id].scrollWidth - sliders[id].clientWidth) {
+        sliders[id].scrollTo({
+            top: 0,
+            left: (scrollAmount[id] += scrollPerClick),
+            behavior: "smooth"
+        });
+    }
+    
+    if (scrollAmount[id] > sliders[id].scrollWidth - sliders[id].clientWidth) {
+        document.querySelectorAll(".switchRight")[id].style.display = "none";
+    }
+}
+
+// scrollPerClick = 400;
+scrollPerClick = document.querySelectorAll(".card-0")[0].clientWidth ;

@@ -22,7 +22,7 @@
             <h2>Nosso lanches favoritos</h2>
             <div class="produtos_populares produtos">
                 @forelse ($favoritos as $product)
-                <a href="{{ route('product', ['id' => $product->id]) }}">
+                <a href="{{ route('product', ['id' => $product->id]) }}" id="tamanho">
                     <div class="produto produto_menu ">
                         <img src="{{asset($product->path_image)}}" alt="">
                         <h3>{{$product->name}}</h3>

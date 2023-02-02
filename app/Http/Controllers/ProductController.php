@@ -32,7 +32,7 @@ class ProductController extends Controller
         $info = Information::findOrFail(1);
 
         // News
-        $news = Product::orderBy('created_at')->limit(2)->get();
+        $news = Product::orderBy('created_at', 'desc')->limit(2)->get();
 
         // Avaliações
         $assessments = Assessment::join('users', 'users.id', '=', 'assessments.user_id')->get();
