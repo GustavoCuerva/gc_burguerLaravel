@@ -139,26 +139,30 @@ class ProductController extends Controller
                         ->orderBy('category_id')->get();
 
         if ($id != 'tudo') {
-            $categories = Category::where('id', $id)->get();
             $products = Saved::where('user_id', $id_user)
                         ->join('products', 'products.id', '=', 'saveds.product_id')
                         ->where('products.category_id', $id);
+
+            $testeCat = $products;
+            $products = $products->get();
+
             /* Getting all the categories that the user has saved. */
-            $categories = $products->groupBy('category_id')
+            $categories = $testeCat->groupBy('category_id')
                         ->join('categories', 'categories.id', '=', 'products.category_id')
                         ->orderBy('category_id')->get();
-            $products = $products->get();
         }else{
             //$categories = Category::all();
             $products = Saved::where('user_id', $id_user)
                         ->join('products', 'products.id', '=', 'saveds.product_id');
 
+            $testeCat = $products;
+
+            $products = $products->get();
+
             /* Getting all the categories that the user has saved. */
-            $categories = $products->groupBy('category_id')
+            $categories = $testeCat->groupBy('category_id')
                             ->join('categories', 'categories.id', '=', 'products.category_id')
                             ->orderBy('category_id')->get();
-            
-            $products = $products->get();
         }
 
         return view('products.favorites', ['products' => $products, 'categories' => $categories, 'cats' => $cats, 'id' => $id]);
