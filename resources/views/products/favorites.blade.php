@@ -36,13 +36,12 @@
     </form>
 
     <h2 style="text-align: center; font-size: 30px; color: #787878; font-weight: 900;">MEUS FAVORITOS</h2>
-{{$products->count()}}
     
         @forelse ($categories as $category)
         <section class="destaque destaque_menu">
             <h2>{{$category->category}}</h2>
-        <section class="carousel">    
-            <div class="carouselBox produtos produtos_menu" style="flex-wrap:nowrap;">
+            <section class="carousel">    
+                <div class="carouselBox produtos produtos_menu" style="flex-wrap:nowrap;">
                 @foreach ($products as $product)
                     @if ($product->category_id == $category->id)
                         <a href="{{route('product', ['id' => $product->id])}}" class="card-{{$loop->index}} slider-card card-product">
