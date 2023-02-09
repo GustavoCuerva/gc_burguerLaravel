@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @yield('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     {{-- <link href="{{asset('/css/bootstrap.css')}}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     
@@ -69,6 +70,7 @@
                     @endif
                     
                 <a href="{{route('reserves')}}"><img src="{{ asset('/icons/menu-svgrepo-com.svg') }}" alt=""></a>
+                <a href="{{route('cart')}}" style="margin-left:3px;"><i class="bi bi-cart4" style="color:white; font-size: 30px;"></i></a>
             </div>
         </div><!--Menu inferior-->
     </header><!--Cabeçalho-->

@@ -20,6 +20,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\MailController;
 
@@ -75,6 +76,8 @@ Route::put('/assessments', [AssessmentController::class, 'update'])->middleware(
 Route::get('/my-data', [UserController::class, 'index'])->middleware('auth')->middleware('verified')->name('my-data');
 Route::put('/my-data', [UserController::class, 'update'])->middleware('auth')->middleware('verified')->name('my-data.update');
 Route::delete('/my-data', [UserController::class, 'destroy'])->middleware('auth')->middleware('verified')->name('delete.user');
+
+Route::get('/cart', [DeliveryController::class, 'cart'])->middleware('auth')->middleware('verified')->name('cart');
 
 Route::get('/end', [UserController::class, 'close'])->middleware('auth')->middleware('verified');
 
