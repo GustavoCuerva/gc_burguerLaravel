@@ -77,7 +77,9 @@ Route::get('/my-data', [UserController::class, 'index'])->middleware('auth')->mi
 Route::put('/my-data', [UserController::class, 'update'])->middleware('auth')->middleware('verified')->name('my-data.update');
 Route::delete('/my-data', [UserController::class, 'destroy'])->middleware('auth')->middleware('verified')->name('delete.user');
 
+// BUY
 Route::get('/cart', [DeliveryController::class, 'cart'])->middleware('auth')->middleware('verified')->name('cart');
+Route::get('/buy', [DeliveryController::class, 'buy'])->middleware('auth')->middleware('verified')->name('buy');
 
 Route::get('/end', [UserController::class, 'close'])->middleware('auth')->middleware('verified');
 

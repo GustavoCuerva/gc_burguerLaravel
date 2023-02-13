@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Favoritos')
+@section('title', 'Carrinho')
 
 @section('styles')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -64,7 +64,7 @@
           <input type="text" placeholder="CEP" name="cep" class="form-control" id="cep">
           <input type="submit" value="Ok" class="btn btn-outline-primary">
         </form>
-        <a class="btn btn-primary">Finalizar a compra</a>
+        <a href="{{route('buy')}}" class="btn btn-primary">Finalizar a compra</a>
       </div>
     </div>
 
@@ -80,6 +80,8 @@
     <script src="{{ asset('/js/jquery.mask.min.js') }}"></script>
 
     <script>
+        var w = document.querySelector(".list-products-cart").clientWidth;
+        console.log(w);
         $('#cep').mask('00000-000')
     </script>
 @endsection

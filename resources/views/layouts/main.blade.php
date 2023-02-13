@@ -99,7 +99,7 @@
                     </div>
                 </div>
         </div>
-        <p class="copy">Gustavo Candido Cuerva &copy 2022</p>
+        <p class="copy" style="margin-bottom: 0;">Gustavo Candido Cuerva &copy 2022</p>
     </footer>
     
     <script src="{{ asset('/js/script.js') }}"></script>
