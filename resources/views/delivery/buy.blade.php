@@ -46,7 +46,7 @@
             <div class="d-flex">
                 <div class="col-md6">
                     <label for="name" class="form-label">Nome:</label>
-                    <input type="text" name="name" id="name" placeholder="Nome" class="form-control">
+                    <input type="text" name="name" id="name" placeholder="Nome" class="form-control" value="{{auth()->user()->name}}">
                 </div>
                 
                 <div class="col-md6">
@@ -82,7 +82,7 @@
             <div class="d-flex">
                 <div class="col-md6">
                     <label for="cep" class="form-label">CEP:</label>
-                    <input type="text" name="cep" id="cep" placeholder="CEP" class="form-control">
+                    <input type="text" name="cep" id="cep" placeholder="CEP" class="form-control" onchange="consultaEndereco(this.value)">
                 </div>
                 <div></div>
             </div>
@@ -100,7 +100,15 @@
             </div>
         </div>
 
-        <input type="submit" value="Finalizar pedido" class="btn btn-primary form-control finalizarPedido">
+        
+        <div class="d-flex">
+            <div style="flex: 1;">
+                <a href="{{route('cart')}}" class="btn btn-danger">Cancelar</a>
+            </div>
+            <div class="col-md6"  style="flex: 1;">
+                <input type="submit" value="Finalizar pedido" class="btn btn-primary form-control finalizarPedido">
+            </div>
+        </div>
     </form>
 </div>
 @endsection
@@ -114,5 +122,45 @@
 
     <script>
         $('#cep').mask('00000-000')
+        $('#cpf').mask('000.000.000-00')
+
+        // Consulta do cep
+        function consultaEndereco(cep) {
+            cep = cep.replace("-", "")
+            
+            if (cep.length == 8) {
+                let url = `https://viacep.com.br/ws/${cep}/json/`
+
+                fetch(url).then(function(response){
+                    response.json().then(function(data){
+                        if (data.erro) {
+                            alert("CEP inválido") 
+                            
+                            $('#address').val('')
+                            $('#neighborhood').val('')
+                            $('#city').val('')
+
+                            document.getElementById('address').disabled = false;
+                            document.getElementById('neighborhood').disabled = false;
+                            document.getElementById('city').disabled = false;
+                        }else{
+                            $('#address').val(data.logradouro)
+                            $('#neighborhood').val(data.bairro)
+                            $('#city').val(data.localidade)
+                            document.getElementById('address').disabled = true;
+                            document.getElementById('neighborhood').disabled = true;
+                            document.getElementById('city').disabled = true;
+                        }
+                    })
+                })
+            }else{
+                alert('Cep inválido')
+
+                document.getElementById('address').disabled = false;
+                document.getElementById('neighborhood').disabled = false;
+                document.getElementById('city').disabled = false;
+            }
+        }
+
     </script>
 @endsection
